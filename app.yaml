@@ -1,0 +1,96 @@
+# You can learn more about the YAML syntax: https://pathway.com/developers/templates/configure-yaml
+
+# You can learn more about data sources  https://pathway.com/developers/templates/yaml-examples/data-sources-examples
+
+$sources:
+  # File System connector, reading data locally.
+  - !pw.io.fs.read
+    path: data
+    format: binary
+    with_metadata: true
+
+  # Uncomment to use the Google Drive connector
+  # - !pw.io.gdrive.read
+  #   object_id: $DRIVE_ID
+  #   service_user_credentials_file: gdrive_indexer.json
+  #   file_name_pattern:
+  #     - "*.pdf"
+  #     - "*.pptx"
+  #   object_size_limit: null
+  #   with_metadata: true
+  #   refresh_interval: 30
+
+
+# Configures the LLM model settings for generating responses.
+# The list of available Pathway LLM wrappers is available here:
+# https://pathway.com/developers/api-docs/pathway-xpacks-llm/llms
+# You can learn more about those in our documentation:
+# https://pathway.com/developers/templates/rag-customization/llm-chats
+
+
+$llm_model: "openai/gemma-3-4b-it-qat"
+
+$llm: !pw.xpacks.llm.llms.LiteLLMChat
+  model: $llm_model
+  retry_strategy: !pw.udfs.ExponentialBackoffRetryStrategy
+    max_retries: 6
+  cache_strategy: !pw.udfs.DefaultCache { }
+  temperature: 0
+  api_base: "http://host.docker.internal:1234/v1"
+  api_key: "fake"
+
+$embedding_model: "avsolatorio/GIST-small-Embedding-v0"
+
+# Specifies the embedder model for converting text into embeddings.
+$embedder: !pw.xpacks.llm.embedders.SentenceTransformerEmbedder
+  model: $embedding_model
+  call_kwargs:
+    show_progress_bar: False
+
+# Sets up the splitter for chunking the documents.
+$splitter: !pw.xpacks.llm.splitters.TokenCountSplitter
+  max_tokens: 400
+
+# Configures the parser for processing and extracting information from documents.
+$parser: !pw.xpacks.llm.parsers.UnstructuredParser
+  cache_strategy: !pw.udfs.DefaultCache { }
+
+# Sets up the retriever factory for indexing and retrieving documents.
+$retriever_factory: !pw.stdlib.indexing.UsearchKnnFactory
+  reserved_space: 1000
+  embedder: $embedder
+  metric: !pw.stdlib.indexing.USearchMetricKind.COS
+  
+  # Manages the storage and retrieval of documents for the RAG template.
+$document_store: !pw.xpacks.llm.document_store.DocumentStore
+  docs: $sources
+  parser: $parser
+  splitter: $splitter
+  retriever_factory: $retriever_factory
+
+# Configures the question-answering component using the RAG approach.
+# The component builds a RAG over an index.
+# You can interact with obtained RAG using a REST API.
+# You can learn more about the available operations here:
+# https://pathway.com/developers/templates/rag-customization/rest-api
+question_answerer: !pw.xpacks.llm.question_answering.BaseRAGQuestionAnswerer
+  llm: $llm
+  indexer: $document_store
+  # You can set the number of documents to be included as the context of the query
+  search_topk: 3
+  # You can use your own prompt for querying.
+  # For that set prompt_template to string with `{query}` used as a placeholder for the question,
+  # and `{context}` as a placeholder for context documents.
+  # prompt_template: "Given these documents: {context}, please answer the question: {query}"
+
+# Change host and port of the webserver by uncommenting these lines
+# host: "0.0.0.0"
+# port: 8000
+
+# Activate on-disk caching for UDFs for which `cache_strategy` is set
+with_cache: true
+
+# If `terminate_on_error` is true then the program will terminate whenever any error is encountered.
+# Defaults to false, uncomment the following line if you want to set it to true
+# terminate_on_error: true
+
