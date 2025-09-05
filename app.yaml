@@ -32,8 +32,8 @@ $llm_model: "openai/gemma-3-4b-it-qat"
 
 $llm: !pw.xpacks.llm.llms.LiteLLMChat
   model: $llm_model
-  retry_strategy: !pw.udfs.ExponentialBackoffRetryStrategy
-    max_retries: 6
+  retry_strategy: !udfs.model_rotate_retry_strategy.ModelRotateRetryStrategy
+    model_list: ["openai/gemma-3-4b-it-qat", "openai/gemma-2-9b-it-qat"]
   cache_strategy: !pw.udfs.DefaultCache { }
   temperature: 0
   api_base: "http://host.docker.internal:1234/v1"
