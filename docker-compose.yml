@@ -8,7 +8,6 @@ services:
       - network
     environment:
       PATHWAY_PORT: "${PATHWAY_PORT:-8000}"
-      PATHWAY_LICENSE_KEY: $PATHWAY_LICENSE_KEY
     volumes:
       - ./data:/app/data
       - ./cache:/app/Cache
