@@ -32,7 +32,7 @@ The backend (this project) hosts the AI models, manages documents and sources, a
 
 ## Architecture
 
-TODO
+![architecture.png](assets/architecture.png)
 
 ---
 
