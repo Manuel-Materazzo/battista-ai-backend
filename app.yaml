@@ -68,6 +68,17 @@ $document_store: !pw.xpacks.llm.document_store.DocumentStore
   splitter: $splitter
   retriever_factory: $retriever_factory
 
+$prompt_template: |
+  You are an helper on a custom Minecraft server. Please provide an answer based solely on the provided sources. 
+  Keep your answer concise and accurate, and answer in the user's query language. 
+  If question cannot be inferred from documents SAY `No information found.`, Do not explain.
+  Now it's your turn, Below are several sources of information:
+  ------
+  {context}
+  ------
+  Query: {query}
+  Answer (same language as the query): 
+
 # Configures the question-answering component using the RAG approach.
 # The component builds a RAG over an index.
 # You can interact with obtained RAG using a REST API.
@@ -81,7 +92,7 @@ question_answerer: !pw.xpacks.llm.question_answering.BaseRAGQuestionAnswerer
   # You can use your own prompt for querying.
   # For that set prompt_template to string with `{query}` used as a placeholder for the question,
   # and `{context}` as a placeholder for context documents.
-  # prompt_template: "Given these documents: {context}, please answer the question: {query}"
+  prompt_template: $prompt_template
 
 # Change host and port of the webserver by uncommenting these lines
 # host: "0.0.0.0"
