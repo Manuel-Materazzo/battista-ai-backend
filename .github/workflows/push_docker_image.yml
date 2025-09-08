@@ -1,0 +1,26 @@
+name: Deploy API Image to GHCR
+
+on:
+  workflow_dispatch:
+
+jobs:
+  push-store-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@main
+
+      - name: 'Login to GitHub Container Registry'
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+
+      - name: 'Build Image'
+        run: |
+          docker build . --tag ghcr.io/manuel-materazzo/battista-ai-backend:latest
+          docker push ghcr.io/manuel-materazzo/battista-ai-backend:latest
