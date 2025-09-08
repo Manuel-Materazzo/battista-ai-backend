@@ -11,6 +11,7 @@ services:
     volumes:
       - ./data:/app/data
       - ./cache:/app/Cache
+      - ./app.yaml:/app/app.yaml
 
   ui:
     build:
