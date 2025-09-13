@@ -3,7 +3,7 @@ import logging
 import pathway as pw
 from dotenv import load_dotenv
 from pathway.xpacks.llm.question_answering import SummaryQuestionAnswerer
-from pathway.xpacks.llm.servers import QASummaryRestServer
+from server.qa_scoped_rest_server import QAScopedRestServer
 from pydantic import BaseModel, ConfigDict, InstanceOf
 
 logging.basicConfig(
@@ -24,7 +24,7 @@ class App(BaseModel):
     terminate_on_error: bool = False
 
     def run(self) -> None:
-        server = QASummaryRestServer(self.host, self.port, self.question_answerer)
+        server = QAScopedRestServer(self.host, self.port, self.question_answerer)
 
         server.run(
             with_cache=self.with_cache,
