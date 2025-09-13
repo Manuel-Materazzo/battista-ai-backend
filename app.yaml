@@ -12,7 +12,7 @@ $sources:
   # Uncomment to use the Google Drive connector
   # - !pw.io.gdrive.read
   #   object_id: $DRIVE_ID
-  #   service_user_credentials_file: gdrive_indexer.json
+  #   service_user_credentials_file: secrets/gdrive_indexer.json
   #   file_name_pattern:
   #     - "*.pdf"
   #     - "*.pptx"

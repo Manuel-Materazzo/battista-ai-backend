@@ -10,6 +10,7 @@ services:
       PATHWAY_PORT: "${PATHWAY_PORT:-8000}"
     volumes:
       - ./data:/app/data
+      - ./secrets:/app/secrets
       - ./cache:/app/Cache
       - ./app.yaml:/app/app.yaml
 
