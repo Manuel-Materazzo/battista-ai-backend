@@ -1,6 +1,7 @@
 import logging
 
 import pathway as pw
+import connectors.gdrive_monkeypatch
 from dotenv import load_dotenv
 from pathway.xpacks.llm.question_answering import SummaryQuestionAnswerer
 from server.qa_scoped_rest_server import QAScopedRestServer
