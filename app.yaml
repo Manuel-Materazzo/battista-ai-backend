@@ -69,15 +69,25 @@ $document_store: !pw.xpacks.llm.document_store.DocumentStore
   retriever_factory: $retriever_factory
 
 $prompt_template: |
-  You are an helper on a custom Minecraft server. Please provide an answer based solely on the provided sources. 
-  Keep your answer concise and accurate, and answer in the user's query language. 
-  If question cannot be inferred from documents SAY `No information found.`, Do not explain.
-  Now it's your turn, Below are several sources of information:
+  You are an helper on a custom Minecraft server. 
+  
+  CRITICAL: You MUST respond in the same language as the user's query, NOT in the language of the context documents.
+  
+  If the user asks in English, respond in English.
+  If the user asks in Italian, respond in Italian.
+  If the user asks in another language, respond in that language.
+  
+  Please provide an answer based solely on the provided sources. Keep your answer concise and accurate. 
+  If the question cannot be inferred from documents, SAY EXACTLY: `No information found.`
+  Do not explain why there is no information.
+  Context documents (ignore the language of the context, your response should match the query language):
   ------
   {context}
   ------
+  
   Query: {query}
-  Answer (same language as the query): 
+  REMEMBER: Answer in the SAME LANGUAGE as the query above, regardless of the context language.
+  Answer: 
 
 # Configures the question-answering component using the RAG approach.
 # The component builds a RAG over an index.
