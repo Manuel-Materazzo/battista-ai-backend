@@ -39,11 +39,12 @@ $llm: !pw.xpacks.llm.llms.LiteLLMChat
   api_base: "http://host.docker.internal:1234/v1"
   api_key: "fake"
 
-$embedding_model: "avsolatorio/GIST-small-Embedding-v0"
+$embedding_model: "Alibaba-NLP/gte-multilingual-base"
 
 # Specifies the embedder model for converting text into embeddings.
 $embedder: !pw.xpacks.llm.embedders.SentenceTransformerEmbedder
   model: $embedding_model
+  trust_remote_code: True
   call_kwargs:
     show_progress_bar: False
 
