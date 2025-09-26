@@ -49,8 +49,10 @@ $embedder: !pw.xpacks.llm.embedders.SentenceTransformerEmbedder
     show_progress_bar: False
 
 # Sets up the splitter for chunking the documents.
-$splitter: !pw.xpacks.llm.splitters.TokenCountSplitter
-  max_tokens: 400
+$splitter: !pw.xpacks.llm.splitters.RecursiveSplitter
+  chunk_size: 400
+  separators: ["\n#", "\n##", "\n\n", "\n", "."]
+  encoding_name: "cl100k_base"
 
 # Configures the parser for processing and extracting information from documents.
 $parser: !pw.xpacks.llm.parsers.UnstructuredParser
