@@ -80,7 +80,7 @@ $prompt_template: |
   If the user asks in Italian, respond in Italian.
   If the user asks in another language, respond in that language.
   
-  Please provide an answer based solely on the provided sources. Keep your answer concise and accurate. 
+  Please provide an answer based solely on the provided sources. Keep your answer BRIEF, DIRECT, CONCISE and ACCURATE. 
   If the question cannot be inferred from documents, SAY EXACTLY: `No information found.`
   Do not explain why there is no information.
   Context documents (ignore the language of the context, your response should match the query language):
@@ -89,7 +89,7 @@ $prompt_template: |
   ------
   
   Query: {query}
-  REMEMBER: Answer in the SAME LANGUAGE as the query above, regardless of the context language.
+  REMEMBER: Answer BRIEFLY in the SAME LANGUAGE as the query above, regardless of the context language.
   Answer: 
 
 # Configures the question-answering component using the RAG approach.
