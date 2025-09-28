@@ -12,6 +12,7 @@ services:
       - ./data:/app/data
       - ./secrets:/app/secrets
       - ./cache:/app/Cache
+      - ./hf-cache:/root/.cache/huggingface
       - ./app.yaml:/app/app.yaml
 
   ui:
