@@ -1,4 +1,6 @@
 import logging
+import pathway as pw
+from typing import Callable
 from pathway.xpacks.llm.question_answering import BaseQuestionAnswerer
 from pathway.xpacks.llm.servers import BaseRestServer
 
@@ -48,3 +50,21 @@ class QAScopedRestServer(BaseRestServer):
             rag_question_answerer.list_documents,
             **rest_kwargs,
         )
+
+    def serve(
+        self,
+        route: str,
+        schema: type[pw.Schema],
+        handler: Callable[[pw.Table], pw.Table],
+        **additional_endpoint_kwargs,
+    ):
+
+        queries, writer = pw.io.http.rest_connector(
+            webserver=self.webserver,
+            route=route,
+            schema=schema,
+            autocommit_duration_ms=50,
+            delete_completed_queries=False,
+            **additional_endpoint_kwargs,
+        )
+        writer(handler(queries))
