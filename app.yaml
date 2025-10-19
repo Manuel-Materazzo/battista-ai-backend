@@ -29,49 +29,15 @@ $sources:
 
 
 $llm_model: "openai/gemma-3-4b-it-qat"
-
-$llm: !pw.xpacks.llm.llms.LiteLLMChat
-  model: $llm_model
-  retry_strategy: !udfs.model_rotate_retry_strategy.ModelRotateRetryStrategy
-    model_list: ["openai/gemma-3-4b-it-qat", "openai/gemma-2-9b-it-qat"]
-  cache_strategy: !pw.udfs.DefaultCache { }
-  temperature: 0
-  api_base: "http://host.docker.internal:1234/v1"
-  api_key: "fake"
+$llm_rotate_model_list: ["openai/gemma-3-4b-it-qat", "openai/gemma-2-9b-it-qat"]
+$llm_api_base: "http://host.docker.internal:1234/v1"
+$llm_api_key: "fake"
 
 $embedding_model: "Alibaba-NLP/gte-multilingual-base"
+$search_topk: 6
+$rerank_topk: 3
 
-# Specifies the embedder model for converting text into embeddings.
-$embedder: !pw.xpacks.llm.embedders.SentenceTransformerEmbedder
-  model: $embedding_model
-  trust_remote_code: True
-  call_kwargs:
-    show_progress_bar: False
-
-# Sets up the splitter for chunking the documents.
-$splitter: !pw.xpacks.llm.splitters.RecursiveSplitter
-  chunk_size: 400
-  separators: ["\n#", "\n##", "\n\n", "\n", "."]
-  encoding_name: "cl100k_base"
-
-# Configures the parser for processing and extracting information from documents.
-$parser: !pw.xpacks.llm.parsers.UnstructuredParser
-  cache_strategy: !pw.udfs.DefaultCache { }
-
-# Sets up the retriever factory for indexing and retrieving documents.
-$retriever_factory: !pw.stdlib.indexing.UsearchKnnFactory
-  reserved_space: 1000
-  embedder: $embedder
-  metric: !pw.stdlib.indexing.USearchMetricKind.COS
-  
-  # Manages the storage and retrieval of documents for the RAG template.
-$document_store: !pw.xpacks.llm.document_store.DocumentStore
-  docs: $sources
-  parser: $parser
-  splitter: $splitter
-  retriever_factory: $retriever_factory
-
-$prompt_template: |
+$rag_prompt_template: |
   You are an helper on a custom Minecraft server. 
   
   CRITICAL: You MUST respond in the same language as the user's query, NOT in the language of the context documents.
@@ -92,27 +58,92 @@ $prompt_template: |
   REMEMBER: Answer BRIEFLY in the SAME LANGUAGE as the query above, regardless of the context language.
   Answer: 
 
+$llm_reranker_prompt_template: |
+  You are a helper agent for RAG applications.
+  Given a question, and a context document, rate the document's relevance for the question on a scale between 1 and 5.
+  5 means the question can be answered based on the given document,and the document is very helpful for the question. 1 means document is totally unrelated to the question.
+  Reply in json format according to the following format:
+  {{"score": <int>}}
+  Do NOT output any other text apart from the raw json response. 
+  Return only raw JSON data. Do not wrap it in markdown code blocks, do NOT include backticks (```).
+  -- Context documents --
+  {context}
+  -- End of context documents --
+  -- Question --
+  {query}
+  -- End of question --
+  Return only raw JSON data. Do not wrap it in markdown code blocks, do NOT include backticks (```).
+
+# Sets up the splitter for chunking the documents.
+$splitter: !pw.xpacks.llm.splitters.RecursiveSplitter
+  chunk_size: 400
+  separators: ["\n#", "\n##", "\n\n", "\n", "."]
+  encoding_name: "cl100k_base"
+
+# Specifies the reranking model to be used to rerank search results.
+$reranker: !pw.xpacks.llm.rerankers.CrossEncoderReranker
+  model_name: "Alibaba-NLP/gte-multilingual-reranker-base"
+  trust_remote_code: True
+
+# Specifies the embedder model for converting text into embeddings.
+$embedder: !pw.xpacks.llm.embedders.SentenceTransformerEmbedder
+  model: $embedding_model
+  trust_remote_code: True
+  call_kwargs:
+    show_progress_bar: False
+
+# Configures the parser for processing and extracting information from documents.
+$parser: !pw.xpacks.llm.parsers.UnstructuredParser
+  cache_strategy: !pw.udfs.DefaultCache { }
+
+# Sets up the retriever factory for indexing and retrieving documents.
+$retriever_factory: !pw.stdlib.indexing.UsearchKnnFactory
+  reserved_space: 1000
+  embedder: $embedder
+  metric: !pw.stdlib.indexing.USearchMetricKind.COS
+  
+# Manages the storage and retrieval of documents for the RAG template.
+$document_store: !pw.xpacks.llm.document_store.DocumentStore
+  docs: $sources
+  parser: $parser
+  splitter: $splitter
+  retriever_factory: $retriever_factory
+
+$llm: !pw.xpacks.llm.llms.LiteLLMChat
+  model: $llm_model
+  retry_strategy: !udfs.model_rotate_retry_strategy.ModelRotateRetryStrategy
+    model_list: $llm_rotate_model_list
+  cache_strategy: !pw.udfs.DefaultCache { }
+  temperature: 0
+  api_base: $llm_api_base
+  api_key: $llm_api_key
+
 # Configures the question-answering component using the RAG approach.
 # The component builds a RAG over an index.
 # You can interact with obtained RAG using a REST API.
 # You can learn more about the available operations here:
 # https://pathway.com/developers/templates/rag-customization/rest-api
-question_answerer: !pw.xpacks.llm.question_answering.BaseRAGQuestionAnswerer
+#question_answerer: !pw.xpacks.llm.question_answering.BaseRAGQuestionAnswerer
+question_answerer: !question_answering.reranked_rag_question_answerer.RerankedRAGQuestionAnswerer
   llm: $llm
   indexer: $document_store
+  reranker: $reranker
   # You can set the number of documents to be included as the context of the query
-  search_topk: 6
+  search_topk: $search_topk
+  # After reranking, only the top 3 documents will be used as context
+  rerank_topk: $rerank_topk
   # You can use your own prompt for querying.
   # For that set prompt_template to string with `{query}` used as a placeholder for the question,
   # and `{context}` as a placeholder for context documents.
-  prompt_template: $prompt_template
+  prompt_template: $rag_prompt_template
+#  context_processor: $context_processor
 
 # Change host and port of the webserver by uncommenting these lines
 # host: "0.0.0.0"
 # port: 8000
 
 # Activate on-disk caching for UDFs for which `cache_strategy` is set
-with_cache: true
+with_cache: false
 
 # If `terminate_on_error` is true then the program will terminate whenever any error is encountered.
 # Defaults to false, uncomment the following line if you want to set it to true
