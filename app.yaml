@@ -123,7 +123,6 @@ $llm: !pw.xpacks.llm.llms.LiteLLMChat
 # You can interact with obtained RAG using a REST API.
 # You can learn more about the available operations here:
 # https://pathway.com/developers/templates/rag-customization/rest-api
-#question_answerer: !pw.xpacks.llm.question_answering.BaseRAGQuestionAnswerer
 question_answerer: !question_answering.reranked_rag_question_answerer.RerankedRAGQuestionAnswerer
   llm: $llm
   indexer: $document_store
@@ -136,7 +135,6 @@ question_answerer: !question_answering.reranked_rag_question_answerer.RerankedRA
   # For that set prompt_template to string with `{query}` used as a placeholder for the question,
   # and `{context}` as a placeholder for context documents.
   prompt_template: $rag_prompt_template
-#  context_processor: $context_processor
 
 # Change host and port of the webserver by uncommenting these lines
 # host: "0.0.0.0"
