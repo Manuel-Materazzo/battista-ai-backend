@@ -1,7 +1,7 @@
 import logging
 import pathway as pw
 from pathway.xpacks.llm import llms, rerankers
-from pathway.xpacks.llm.question_answering import BaseRAGQuestionAnswerer, _prepare_RAG_response
+from pathway.xpacks.llm.question_answering import BaseRAGQuestionAnswerer, _prepare_RAG_response, _limit_documents
 
 logger = logging.getLogger(__name__)
 
@@ -25,6 +25,50 @@ class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
         self.reranker = reranker
         self.rerank_topk = rerank_topk if rerank_topk is not None else max(1, self.search_topk // 2)
 
+    def _apply_reranking(self, pw_ai_results: pw.Table) -> pw.Table:
+        """Apply reranking to retrieved documents."""
+
+        @pw.udf
+        def add_score_to_doc(doc: pw.Json, score: float) -> dict:
+            return {**doc.as_dict(), "reranker_score": score}
+
+        # Flatten docs into rows
+        pw_ai_results_exploded = pw_ai_results.flatten(pw_ai_results.docs, origin_id='query_id')
+
+        # Apply reranker
+        pw_ai_results_scored = pw_ai_results_exploded.select(
+            pw.this.prompt,
+            pw.this.model,
+            pw.this.filters,
+            pw.this.return_context_docs,
+            pw.this.query_id,
+            doc=pw.this.docs,
+            reranker_score=self.reranker(pw.this.docs["text"], pw.this.prompt)
+        )
+
+        pw_ai_results_scored = pw_ai_results_scored.await_futures()
+
+        # Add score and sort
+        pw_ai_results_scored = pw_ai_results_scored.with_columns(
+            sort_key=-pw.this.reranker_score,
+            doc_with_score=add_score_to_doc(pw.this.doc, pw.this.reranker_score)
+        )
+
+        # Reassemble documents
+        pw_ai_results = pw_ai_results_scored.groupby(pw.this.query_id, sort_by=pw.this.sort_key).reduce(
+            query_id=pw.this.query_id,
+            prompt=pw.reducers.any(pw.this.prompt),
+            model=pw.reducers.any(pw.this.model),
+            filters=pw.reducers.any(pw.this.filters),
+            return_context_docs=pw.reducers.any(pw.this.return_context_docs),
+            docs=pw.reducers.tuple(pw.this.doc_with_score),
+        ).with_id(pw.this.query_id)
+
+        # Keep only top k
+        return pw_ai_results.with_columns(
+            docs=_limit_documents(pw.this.docs, k=self.rerank_topk)
+        )
+
     @pw.table_transformer
     def answer_query(self, pw_ai_queries: pw.Table) -> pw.Table:
         """Answer a question based on the available information with document reduction."""
@@ -40,50 +84,8 @@ class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
             docs=pw.this.result,
         )
 
-        @pw.udf
-        def add_score_to_doc(doc: pw.Json, score: float) -> dict:
-            return {**doc.as_dict(), "reranker_score": score}
-
-        # Flatten docs (a json array) into a list of rows. keep origin_id on each row.
-        pw_ai_results_exploded = pw_ai_results.flatten(pw.this.docs, origin_id='query_id')
-
-        # Apply reranker to assess relevance of each doc
-        pw_ai_results_scored = pw_ai_results_exploded.select(
-            pw.this.prompt,
-            pw.this.model,
-            pw.this.filters,
-            pw.this.return_context_docs,
-            pw.this.query_id,
-            doc=pw.this.docs,
-            reranker_score=self.reranker(pw.this.docs["text"], pw.this.prompt)
-        )
-
-        pw_ai_results_scored = pw_ai_results_scored.await_futures()
-
-        # Add score to each document, and create sort key based on descending rerank scores
-        pw_ai_results_scored = pw_ai_results_scored.with_columns(
-            sort_key=-pw.this.reranker_score,
-            doc_with_score=add_score_to_doc(pw.this.doc, pw.this.reranker_score)
-        )
-
-        @pw.udf
-        def take_top_k(docs: tuple, k: int = 3) -> tuple:
-            return docs[:k]
-
-        # Reassemble the doc list by Grouping by query_id. Sort documents by sort_key.
-        pw_ai_results = pw_ai_results_scored.groupby(pw.this.query_id, sort_by=pw.this.sort_key).reduce(
-            query_id=pw.this.query_id,
-            prompt=pw.reducers.any(pw.this.prompt),
-            model=pw.reducers.any(pw.this.model),
-            filters=pw.reducers.any(pw.this.filters),
-            return_context_docs=pw.reducers.any(pw.this.return_context_docs),
-            docs=pw.reducers.tuple(pw.this.doc_with_score),
-        ).with_id(pw.this.query_id)
-
-        # Keep only the top k documents with highest rerank score
-        pw_ai_results = pw_ai_results.with_columns(
-            docs=take_top_k(pw.this.docs, k=self.rerank_topk)
-        )
+        if self.reranker is not None:
+            pw_ai_results = self._apply_reranking(pw_ai_results)
 
         pw_ai_results += pw_ai_results.select(
             context=self.docs_to_context_transformer(pw.this.docs)
