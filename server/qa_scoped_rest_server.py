@@ -4,6 +4,8 @@ from typing import Callable
 from pathway.xpacks.llm.question_answering import BaseQuestionAnswerer
 from pathway.xpacks.llm.servers import BaseRestServer
 
+from processors.chat_moderator import ChatModerator
+
 logger = logging.getLogger(__name__)
 
 class QAScopedRestServer(BaseRestServer):
@@ -22,11 +24,12 @@ class QAScopedRestServer(BaseRestServer):
     """
 
     def __init__(
-        self,
-        host: str,
-        port: int,
-        rag_question_answerer: BaseQuestionAnswerer,
-        **rest_kwargs,
+            self,
+            host: str,
+            port: int,
+            rag_question_answerer: BaseQuestionAnswerer,
+            chat_moderator: ChatModerator,
+            **rest_kwargs,
     ):
         super().__init__(host, port, **rest_kwargs)
 
@@ -51,14 +54,20 @@ class QAScopedRestServer(BaseRestServer):
             **rest_kwargs,
         )
 
-    def serve(
-        self,
-        route: str,
-        schema: type[pw.Schema],
-        handler: Callable[[pw.Table], pw.Table],
-        **additional_endpoint_kwargs,
-    ):
+        self.serve(
+            "/v1/moderate",
+            chat_moderator.ModerationSchema,
+            chat_moderator.moderate,
+            **rest_kwargs,
+        )
 
+    def serve(
+            self,
+            route: str,
+            schema: type[pw.Schema],
+            handler: Callable[[pw.Table], pw.Table],
+            **additional_endpoint_kwargs,
+    ):
         queries, writer = pw.io.http.rest_connector(
             webserver=self.webserver,
             route=route,
