@@ -123,7 +123,7 @@ $llm: !pw.xpacks.llm.llms.LiteLLMChat
 # You can interact with obtained RAG using a REST API.
 # You can learn more about the available operations here:
 # https://pathway.com/developers/templates/rag-customization/rest-api
-question_answerer: !question_answering.reranked_rag_question_answerer.RerankedRAGQuestionAnswerer
+question_answerer: !processors.reranked_rag_question_answerer.RerankedRAGQuestionAnswerer
   llm: $llm
   indexer: $document_store
   reranker: $reranker
