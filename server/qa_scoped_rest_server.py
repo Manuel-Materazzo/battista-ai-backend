@@ -28,7 +28,7 @@ class QAScopedRestServer(BaseRestServer):
             host: str,
             port: int,
             rag_question_answerer: BaseQuestionAnswerer,
-            chat_moderator: ChatModerator,
+            chat_moderator: ChatModerator | None = None,
             **rest_kwargs,
     ):
         super().__init__(host, port, **rest_kwargs)
@@ -54,12 +54,13 @@ class QAScopedRestServer(BaseRestServer):
             **rest_kwargs,
         )
 
-        self.serve(
-            "/v1/moderate",
-            chat_moderator.ModerationSchema,
-            chat_moderator.moderate,
-            **rest_kwargs,
-        )
+        if chat_moderator:
+            self.serve(
+                "/v1/moderate",
+                chat_moderator.ModerationSchema,
+                chat_moderator.moderate,
+                **rest_kwargs,
+            )
 
     def serve(
             self,

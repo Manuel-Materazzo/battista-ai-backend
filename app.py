@@ -19,7 +19,7 @@ load_dotenv()
 
 class App(BaseModel):
     question_answerer: InstanceOf[SummaryQuestionAnswerer]
-    chat_moderator: InstanceOf[ChatModerator]
+    chat_moderator: InstanceOf[ChatModerator] | None = None
     host: str = "0.0.0.0"
     port: int = 8000
 
