@@ -37,6 +37,8 @@ $embedding_model: "Alibaba-NLP/gte-multilingual-base"
 $search_topk: 6
 $rerank_topk: 3
 
+$moderator_model: "textdetox/xlmr-large-toxicity-classifier-v2"
+
 $rag_prompt_template: |
   You are an helper on a custom Minecraft server. 
   
@@ -91,6 +93,12 @@ $embedder: !pw.xpacks.llm.embedders.SentenceTransformerEmbedder
   trust_remote_code: True
   call_kwargs:
     show_progress_bar: False
+
+# Specifies the moderator model for moderating the chat.
+chat_moderator: !processors.chat_moderator.ChatModerator
+  moderator: !processors.sequence_classification_moderator.SequenceClassificationModerator
+    model_name: $moderator_model
+    tokenizer_model_name: $moderator_model
 
 # Configures the parser for processing and extracting information from documents.
 $parser: !pw.xpacks.llm.parsers.UnstructuredParser
