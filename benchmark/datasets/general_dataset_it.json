@@ -1,0 +1,487 @@
+[
+{
+"message": "ciao a tutti come va?",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "sei proprio un cane inutile",
+"score": 0.88,
+"toxic": true
+},
+{
+"message": "qualcuno ha il microfono?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "ma vai a morire pezzo di merda",
+"score": 0.97,
+"toxic": true
+},
+{
+"message": "bella serata ragazzi",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "sei il giocatore più scarso che abbia mai visto",
+"score": 0.79,
+"toxic": true
+},
+{
+"message": "qualcuno vuole fare squadra?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "ma smettila di parlare idiota",
+"score": 0.82,
+"toxic": true
+},
+{
+"message": "che ore sono da voi?",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "ti auguro il cancro coglione",
+"score": 1.0,
+"toxic": true
+},
+{
+"message": "ci vediamo più tardi",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "fai veramente schifo come persona",
+"score": 0.86,
+"toxic": true
+},
+{
+"message": "qualcuno sa che giorno esce l'update?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "ma vaffanculo te e tutta la tua famiglia",
+"score": 0.96,
+"toxic": true
+},
+{
+"message": "mi serve una pausa tra 5 minuti",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "sei proprio un handicappato mentale",
+"score": 0.97,
+"toxic": true
+},
+{
+"message": "che bel gruppo stasera",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "impara a parlare decerebrato",
+"score": 0.84,
+"toxic": true
+},
+{
+"message": "sto tornando tra un attimo",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "spero ti venga un infarto davanti al PC",
+"score": 0.98,
+"toxic": true
+},
+{
+"message": "buonasera a tutti",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "sei solo spazzatura umana inutile",
+"score": 0.92,
+"toxic": true
+},
+{
+"message": "qualcuno ha già cenato?",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "ma levati dai piedi down di cromosomi",
+"score": 0.95,
+"toxic": true
+},
+{
+"message": "chi vuole giocare domani sera?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "ti reporto e ti bannano per sempre",
+"score": 0.81,
+"toxic": true
+},
+{
+"message": "bella questa community",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "ma muori male bastardo",
+"score": 0.96,
+"toxic": true
+},
+{
+"message": "mi sto divertendo molto stasera",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "sei la vergogna del server",
+"score": 0.77,
+"toxic": true
+},
+{
+"message": "qualcuno ha visto il torneo di ieri?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "ma che cazzo stai dicendo idiota",
+"score": 0.89,
+"toxic": true
+},
+{
+"message": "ho appena iniziato a giocare",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "sei proprio un mongoloide del cazzo",
+"score": 0.98,
+"toxic": true
+},
+{
+"message": "come funziona questa modalità?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "ti ammazzo e ti spawno killo tutta la notte",
+"score": 0.91,
+"toxic": true
+},
+{
+"message": "grazie per avermi accettato nel clan",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "fai proprio pietà come giocatore e come persona",
+"score": 0.85,
+"toxic": true
+},
+{
+"message": "qualcuno conosce un buon server?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "spero ti muoia qualcuno in famiglia",
+"score": 0.99,
+"toxic": true
+},
+{
+"message": "bello il vostro logo",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "ma vai a piangere da mammina nabbo",
+"score": 0.76,
+"toxic": true
+},
+{
+"message": "devo andare a mangiare brb",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "sei il cancro di questo gioco",
+"score": 0.90,
+"toxic": true
+},
+{
+"message": "qualcuno sa quando ci sono gli sconti?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "ma smetti di respirare down",
+"score": 0.93,
+"toxic": true
+},
+{
+"message": "belle le nuove skin",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "ti auguro di morire ammazzato",
+"score": 0.99,
+"toxic": true
+},
+{
+"message": "mi consigliate un mouse da gaming?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "sei proprio una merda umana",
+"score": 0.94,
+"toxic": true
+},
+{
+"message": "quanto ping avete?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "ma quale rank hai comprato scemo",
+"score": 0.78,
+"toxic": true
+},
+{
+"message": "ottimo il nuovo update",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "levati il PC dalle mani handicappato",
+"score": 0.87,
+"toxic": true
+},
+{
+"message": "sono nuovo qui aiutatemi",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "fai veramente schifo vai a morire",
+"score": 0.95,
+"toxic": true
+},
+{
+"message": "bella partita prima",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "ma vaffanculo tossico di merda",
+"score": 0.92,
+"toxic": true
+},
+{
+"message": "qualcuno gioca anche ad altri giochi?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "sei solo un peso morto inutile",
+"score": 0.83,
+"toxic": true
+},
+{
+"message": "che fps avete di solito?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "impara a giocare prima di parlare coglione",
+"score": 0.86,
+"toxic": true
+},
+{
+"message": "bello questo evento",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "ti grifo tutto quello che hai bastardo",
+"score": 0.88,
+"toxic": true
+},
+{
+"message": "come si fa ad entrare nel discord?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "sei la peggiore persona che abbia mai conosciuto",
+"score": 0.81,
+"toxic": true
+},
+{
+"message": "mi piace molto questo gioco",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "ma muori male con tutta la tua stirpe",
+"score": 0.98,
+"toxic": true
+},
+{
+"message": "qualcuno ha visto lo streamer famoso?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "fai proprio pena decerebrato",
+"score": 0.84,
+"toxic": true
+},
+{
+"message": "ottima community qui",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "sei solo un troll inutile di merda",
+"score": 0.89,
+"toxic": true
+},
+{
+"message": "da quanto giocate a questo gioco?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "spero ti bannino per sempre idiota",
+"score": 0.82,
+"toxic": true
+},
+{
+"message": "bella l'atmosfera stasera",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "ma vai a cagare down del cazzo",
+"score": 0.91,
+"toxic": true
+},
+{
+"message": "qualcuno ha configurazioni PC da consigliarmi?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "sei proprio spazzatura parlante",
+"score": 0.87,
+"toxic": true
+},
+{
+"message": "grazie per i consigli",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "ti auguro il peggio possibile coglione",
+"score": 0.93,
+"toxic": true
+},
+{
+"message": "che bella serata di gioco",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "ma chi ti ha dato il permesso di parlare",
+"score": 0.74,
+"toxic": true
+},
+{
+"message": "mi sto godendo molto il gioco",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "sei il giocatore più schifoso mai visto",
+"score": 0.85,
+"toxic": true
+},
+{
+"message": "qualcuno vuole fare amicizia?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "ma levati dalla faccia del mondo handicappato",
+"score": 0.96,
+"toxic": true
+},
+{
+"message": "bella questa nuova mappa",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "fai veramente schifo come essere umano",
+"score": 0.88,
+"toxic": true
+},
+{
+"message": "ci sono tornei in programma?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "spero ti venga qualcosa di brutto",
+"score": 0.90,
+"toxic": true
+},
+{
+"message": "ottimo server davvero",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "sei solo un fallito nella vita",
+"score": 0.83,
+"toxic": true
+},
+{
+"message": "ci vediamo domani stesso orario?",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "ma vai a morire male pezzo di merda",
+"score": 0.97,
+"toxic": true
+},
+{
+"message": "grazie mille per la sessione",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "ti reporto e faccio chiudere il tuo account",
+"score": 0.79,
+"toxic": true
+},
+{
+"message": "buona serata a tutti",
+"score": 0.01,
+"toxic": false
+}
+]

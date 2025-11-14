@@ -1,0 +1,482 @@
+[
+  {
+    "message": "gg wp everyone!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "nice shot dude",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're all trash, uninstall the game",
+    "score": 0.95,
+    "toxic": true
+  },
+  {
+    "message": "can someone help mid?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "kys noob",
+    "score": 1.0,
+    "toxic": true
+  },
+  {
+    "message": "that was a close one!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop feeding you idiot",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "let's focus on objectives",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're absolutely useless",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "thanks for the heal!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "report this troll",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "my bad, sorry team",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "why are you even playing this game",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "great teamwork guys",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you suck at this",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "need backup at point B",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "worst player I've ever seen",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "anyone have a mic?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "delete your account",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "well played!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "go back to tutorial mode",
+    "score": 0.65,
+    "toxic": true
+  },
+  {
+    "message": "that was clutch!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're braindead",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "let's try a different strategy",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "how did you even get to this rank",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "nice carry!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're griefing on purpose",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "enemy spotted north",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "hope you get banned",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "good game everyone",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're throwing the match",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "nice try team",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "absolute garbage player",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "let's regroup",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you don't deserve this rank",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "thanks for the revive",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop playing like trash",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "pushing left side",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're a waste of space",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "that combo was sick",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "why don't you just afk",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "good call on that play",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're the reason we're losing",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "defend the objective!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "get good or get out",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "awesome headshot",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're completely useless to the team",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "falling back",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "learn to play before ranked",
+    "score": 0.65,
+    "toxic": true
+  },
+  {
+    "message": "incredible save!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're inting",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "covering you",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "worst teammate ever",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "well defended",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you should be ashamed",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "on my way",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop being so bad",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "that was impressive",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're ruining the game for everyone",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "sorry about that mistake",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you have no idea what you're doing",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "heal when you can",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're pathetic",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "nice positioning",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "just uninstall already",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "watch the flank",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're actively sabotaging us",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "amazing coordination",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "how are you this bad",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "gathering resources",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're a liability",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "great support!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "can't believe you're this terrible",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "reloading",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you don't belong here",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "that timing was perfect",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're dragging us down",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "ready when you are",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "maybe try a different game",
+    "score": 0.65,
+    "toxic": true
+  },
+  {
+    "message": "fantastic play",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're completely clueless",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "ulti ready",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "do everyone a favor and leave",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "nice recovery",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're making us lose on purpose",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "hold this position",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you play like a bot",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "strong push team",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you shouldn't be allowed to play ranked",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "enemy low health",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're embarrassing yourself",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "brilliant strategy",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you have zero skill",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "requesting ammo",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're hopeless",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "we can still win this",
+    "score": 0.0,
+    "toxic": false
+  }
+]

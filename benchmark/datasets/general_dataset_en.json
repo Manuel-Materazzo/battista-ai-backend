@@ -1,0 +1,472 @@
+[
+  {
+    "message": "hey everyone!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "how's everyone doing today?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "shut up nobody cares",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "anyone else lagging?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you talk too much idiot",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "brb getting water",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop spamming chat loser",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "what time is it for you guys?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "your voice is annoying",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "lol that was funny",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "nobody asked for your opinion",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "nice weather here today",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're so cringe",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "been playing this game for years",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "just shut up already",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "anyone down to play later?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're so annoying it hurts",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "what's your favorite game mode?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop talking you're giving me a headache",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "good morning everyone",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "literally nobody likes you",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "taking a quick break",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're pathetic",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "who else is excited for the weekend?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "go away nobody wants you here",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "just got home from work",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're making my ears bleed",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "anyone know a good tutorial?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "shut your mouth",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "this is my first time playing",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're absolutely insufferable",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "connection seems stable now",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop being such a tryhard",
+    "score": 0.65,
+    "toxic": true
+  },
+  {
+    "message": "lmao that's hilarious",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're a joke",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "what platform are you on?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "your opinions are trash",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "been having a great day",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're wasting everyone's time",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "thanks for the add!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop being so toxic",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "does anyone have discord?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're embarrassing yourself",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "just installed the new update",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "nobody wants to hear you talk",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "how long have you been playing?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you have zero personality",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "nice meeting you all",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're so dumb it's unbelievable",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "gtg dinner time",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop pretending you're funny",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "who else loves this game?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're so cringe I can't stand it",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "afk for a minute",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you sound like an idiot",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "what's everyone's rank?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "please just be quiet",
+    "score": 0.65,
+    "toxic": true
+  },
+  {
+    "message": "having fun so far",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're ruining the vibe",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "anyone want to party up?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "your jokes aren't funny",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "internet is acting weird today",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're the most annoying person here",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "what's your favorite map?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop trying to be cool",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "back, sorry about that",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're completely insufferable",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "loving the new season",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "do us all a favor and mute yourself",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "catching up on some challenges",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're legitimately stupid",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "anyone else excited for the event?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "your existence is annoying",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "see you all tomorrow",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop acting like you matter",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "what server region are you on?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're worthless",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "thinking about streaming later",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "nobody respects you",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "pretty chill session today",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're a waste of space in this chat",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "learning new strategies",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop pretending anyone cares",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "who wants to join my squad?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're making everyone uncomfortable",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "got my headset working finally",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you have no social skills",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "what's everyone's favorite weapon?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're so desperate for attention",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "happy Friday everyone",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "everyone hates you and you know it",
+    "score": 0.95,
+    "toxic": true
+  },
+  {
+    "message": "taking screenshots of cool moments",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're a disgrace to this community",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "thanks for playing with me",
+    "score": 0.0,
+    "toxic": false
+  }
+]

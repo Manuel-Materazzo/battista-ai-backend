@@ -1,0 +1,482 @@
+[
+  {
+    "message": "anyone want to build together?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "nice house!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop griefing my build you idiot",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "found diamonds at y12",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're trash at pvp",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "that redstone contraption is amazing",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "kill yourself noob",
+    "score": 1.0,
+    "toxic": true
+  },
+  {
+    "message": "can I join your base?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you build like a 5 year old",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "thanks for the resources!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop being so annoying",
+    "score": 0.65,
+    "toxic": true
+  },
+  {
+    "message": "creeper behind you!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're ruining the server",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "awesome farm design",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "get off this server",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "need help with the ender dragon?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're pathetic at this game",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "who wants to go mining?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "hope you get banned",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "your castle looks great",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop stealing from chests",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "found a village nearby",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're the worst builder ever",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "let's raid the nether fortress",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "delete your world",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "cool skin!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you have no idea how to play",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "sharing coordinates in chat",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're absolute garbage",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "thanks for showing me that trick",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "why are you even on this server",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "enchanted my pickaxe finally",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're griefing on purpose",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "great job on the bridge",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "learn to play before joining",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "does anyone have spare iron?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're braindead",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "let's work on the community farm",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop being such a loser",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "that's a clever design",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you shouldn't be allowed to build",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "skeleton in the cave!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're useless to this server",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "nice parkour course",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "go play creative mode baby",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "found the stronghold!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're so bad it's embarrassing",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "love the texture pack",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop placing random blocks everywhere",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "beacon is active",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're a waste of space",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "awesome mob grinder",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "nobody wants you here",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "trading emeralds at spawn",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you can't build anything decent",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "beautiful garden!",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're making everyone quit",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "need wood? I have extras",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you play like a bot",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "epic tower design",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're actually braindead",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "setting up a shop at market",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "worst player on the server",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "thanks for the tour",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're completely clueless",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "spawner found at coordinates",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "just leave already",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "your pixel art is incredible",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're ruining everyone's experience",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "let's beat the wither together",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "how are you this terrible",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "great use of different blocks",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you don't deserve to play here",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "mob trap is working perfectly",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're so annoying everyone hates you",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "anyone need help building?",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "go back to tutorial mode",
+    "score": 0.7,
+    "toxic": true
+  },
+  {
+    "message": "impressive redstone knowledge",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're griefing everything",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "portal hub looks amazing",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you shouldn't have access to this server",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "starting a new project at base",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're absolutely useless",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "cool use of shaders",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "stop trying you're hopeless",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "elytra flying is so fun",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you have zero building skills",
+    "score": 0.8,
+    "toxic": true
+  },
+  {
+    "message": "the statue turned out great",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "maybe try a different game",
+    "score": 0.65,
+    "toxic": true
+  },
+  {
+    "message": "slime farm is producing well",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're a complete embarrassment",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "village trading hall complete",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you ruin everything you touch",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "thanks for helping with resources",
+    "score": 0.0,
+    "toxic": false
+  },
+  {
+    "message": "you're pathetic and everyone knows it",
+    "score": 0.9,
+    "toxic": true
+  },
+  {
+    "message": "the lighthouse looks fantastic",
+    "score": 0.0,
+    "toxic": false
+  }
+]

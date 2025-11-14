@@ -1,0 +1,487 @@
+[
+{
+"message": "interessante il tuo stile di gioco...",
+"score": 0.45,
+"toxic": false
+},
+{
+"message": "continua così genio, vediamo dove arrivi",
+"score": 0.62,
+"toxic": true
+},
+{
+"message": "qualcuno ha freddo qui dentro?",
+"score": 0.08,
+"toxic": false
+},
+{
+"message": "certo che hai delle strategie particolari",
+"score": 0.58,
+"toxic": true
+},
+{
+"message": "bella mossa davvero, molto creativa",
+"score": 0.12,
+"toxic": false
+},
+{
+"message": "ah ok, quindi questa è la tua idea di giocare",
+"score": 0.54,
+"toxic": true
+},
+{
+"message": "qualcuno sa che ore sono?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "immagino tu sia molto fiero di te stesso",
+"score": 0.67,
+"toxic": true
+},
+{
+"message": "mi serve un caffè, voi?",
+"score": 0.03,
+"toxic": false
+},
+{
+"message": "interessante interpretazione delle regole",
+"score": 0.51,
+"toxic": true
+},
+{
+"message": "bella serata per giocare",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "complimenti per l'originalità, davvero",
+"score": 0.63,
+"toxic": true
+},
+{
+"message": "qualcuno vuole fare una pausa?",
+"score": 0.04,
+"toxic": false
+},
+{
+"message": "ah quindi funziona così nella tua testa",
+"score": 0.71,
+"toxic": true
+},
+{
+"message": "che bella giornata oggi",
+"score": 0.01,
+"toxic": false
+},
+{
+"message": "sicuro di aver capito come funziona?",
+"score": 0.56,
+"toxic": true
+},
+{
+"message": "mi piace questa modalità",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "deve essere dura vivere così",
+"score": 0.69,
+"toxic": true
+},
+{
+"message": "qualcuno ha consigli per il setup?",
+"score": 0.03,
+"toxic": false
+},
+{
+"message": "wow che talento naturale che hai",
+"score": 0.64,
+"toxic": true
+},
+{
+"message": "bella questa community",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "immagino tu sia abituato a giocare così",
+"score": 0.57,
+"toxic": true
+},
+{
+"message": "come va la serata ragazzi?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "certo che ne hai di pazienza con te stesso",
+"score": 0.68,
+"toxic": true
+},
+{
+"message": "ottimo il nuovo update",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "interessante la tua definizione di skill",
+"score": 0.61,
+"toxic": true
+},
+{
+"message": "qualcuno gioca domani sera?",
+"score": 0.03,
+"toxic": false
+},
+{
+"message": "ah ecco, quindi era quella la strategia",
+"score": 0.53,
+"toxic": true
+},
+{
+"message": "bella mappa questa",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "deve essere bello vivere nel tuo mondo",
+"score": 0.72,
+"toxic": true
+},
+{
+"message": "mi sto godendo la partita",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "certo che hai un modo tutto tuo di interpretare le cose",
+"score": 0.59,
+"toxic": true
+},
+{
+"message": "qualcuno ha lag?",
+"score": 0.04,
+"toxic": false
+},
+{
+"message": "immagino tu sia molto soddisfatto del risultato",
+"score": 0.55,
+"toxic": true
+},
+{
+"message": "ottima atmosfera stasera",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "interessante quello che stai facendo lì",
+"score": 0.48,
+"toxic": false
+},
+{
+"message": "bella skin quella",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "continua pure così, vediamo cosa succede",
+"score": 0.66,
+"toxic": true
+},
+{
+"message": "quanto ping avete?",
+"score": 0.03,
+"toxic": false
+},
+{
+"message": "certo che hai delle priorità particolari",
+"score": 0.58,
+"toxic": true
+},
+{
+"message": "mi piace molto questo gioco",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "ah quindi era questo il piano geniale",
+"score": 0.65,
+"toxic": true
+},
+{
+"message": "qualcuno ha visto il torneo?",
+"score": 0.03,
+"toxic": false
+},
+{
+"message": "deve essere interessante ragionare come te",
+"score": 0.70,
+"toxic": true
+},
+{
+"message": "bella questa modalità",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "complimenti per la coerenza, davvero",
+"score": 0.62,
+"toxic": true
+},
+{
+"message": "mi serve una pausa",
+"score": 0.03,
+"toxic": false
+},
+{
+"message": "interessante la tua percezione della realtà",
+"score": 0.67,
+"toxic": true
+},
+{
+"message": "ottimo server questo",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "certo che hai molto da insegnarci",
+"score": 0.61,
+"toxic": true
+},
+{
+"message": "qualcuno conosce altri giochi simili?",
+"score": 0.03,
+"toxic": false
+},
+{
+"message": "immagino tu sia molto orgoglioso delle tue scelte",
+"score": 0.64,
+"toxic": true
+},
+{
+"message": "bella partita prima",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "ah quindi questa sarebbe la tua idea di teamwork",
+"score": 0.68,
+"toxic": true
+},
+{
+"message": "come funziona questa quest?",
+"score": 0.03,
+"toxic": false
+},
+{
+"message": "deve essere comodo vedere il mondo così",
+"score": 0.66,
+"toxic": true
+},
+{
+"message": "ottima scelta quella",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "interessante quello che consideri importante",
+"score": 0.57,
+"toxic": true
+},
+{
+"message": "qualcuno ha il discord?",
+"score": 0.03,
+"toxic": false
+},
+{
+"message": "certo che hai un talento speciale",
+"score": 0.63,
+"toxic": true
+},
+{
+"message": "bella community qui",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "ah ok quindi questo era il tuo contributo",
+"score": 0.59,
+"toxic": true
+},
+{
+"message": "mi sto divertendo molto",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "immagino tu sia molto consapevole di quello che fai",
+"score": 0.52,
+"toxic": true
+},
+{
+"message": "ottimo evento questo",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "deve essere difficile mantenere questa coerenza",
+"score": 0.65,
+"toxic": true
+},
+{
+"message": "qualcuno vuole fare squadra?",
+"score": 0.03,
+"toxic": false
+},
+{
+"message": "interessante la tua scala di valori",
+"score": 0.60,
+"toxic": true
+},
+{
+"message": "bella serata di gioco",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "complimenti per l'impegno, si vede proprio",
+"score": 0.58,
+"toxic": true
+},
+{
+"message": "come si accede al menu?",
+"score": 0.03,
+"toxic": false
+},
+{
+"message": "certo che hai un modo particolare di vedere le cose",
+"score": 0.56,
+"toxic": true
+},
+{
+"message": "mi piace questo stile di gioco",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "ah quindi era questo il master plan",
+"score": 0.64,
+"toxic": true
+},
+{
+"message": "qualcuno ha fps bassi?",
+"score": 0.04,
+"toxic": false
+},
+{
+"message": "deve essere rilassante non pensarci troppo",
+"score": 0.69,
+"toxic": true
+},
+{
+"message": "ottima questa feature",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "interessante quello che chiami strategia",
+"score": 0.62,
+"toxic": true
+},
+{
+"message": "bella l'ambientazione",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "immagino tu sia soddisfatto di come va",
+"score": 0.54,
+"toxic": true
+},
+{
+"message": "mi serve aiuto qui",
+"score": 0.03,
+"toxic": false
+},
+{
+"message": "certo che hai delle convinzioni particolari",
+"score": 0.57,
+"toxic": true
+},
+{
+"message": "ottimo il bilanciamento",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "continua pure, è interessante vedere dove porti tutto questo",
+"score": 0.61,
+"toxic": true
+},
+{
+"message": "qualcuno vuole fare amicizia?",
+"score": 0.03,
+"toxic": false
+},
+{
+"message": "ah quindi questo era il piano dall'inizio",
+"score": 0.55,
+"toxic": true
+},
+{
+"message": "bella questa grafica",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "deve essere bello non farsi troppi problemi",
+"score": 0.68,
+"toxic": true
+},
+{
+"message": "mi piace l'atmosfera qui",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "interessante la tua interpretazione di fair play",
+"score": 0.66,
+"toxic": true
+},
+{
+"message": "come va la serata?",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "certo che hai molto da condividere con noi",
+"score": 0.59,
+"toxic": true
+},
+{
+"message": "ottimo gameplay",
+"score": 0.02,
+"toxic": false
+},
+{
+"message": "immagino tu ti senta molto a tuo agio così",
+"score": 0.63,
+"toxic": true
+},
+{
+"message": "qualcuno ha consigli?",
+"score": 0.03,
+"toxic": false
+},
+{
+"message": "deve essere comodo non doversi sforzare troppo",
+"score": 0.70,
+"toxic": true
+},
+{
+"message": "ci vediamo domani",
+"score": 0.02,
+"toxic": false
+}
+]

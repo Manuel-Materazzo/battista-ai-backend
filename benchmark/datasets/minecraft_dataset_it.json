@@ -1,0 +1,487 @@
+[
+  {
+    "message": "qualcuno vuole fare mining insieme?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "sei proprio un cane smettila di rompere",
+    "score": 0.86,
+    "toxic": true
+  },
+  {
+    "message": "bella base che hai costruito!",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "ma vai a morire griefer di merda",
+    "score": 0.97,
+    "toxic": true
+  },
+  {
+    "message": "ho trovato diamanti al layer 12",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ti grifo tutta la base idiota",
+    "score": 0.92,
+    "toxic": true
+  },
+  {
+    "message": "qualcuno ha del cibo extra?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma impara a buildare nabbo",
+    "score": 0.74,
+    "toxic": true
+  },
+  {
+    "message": "posso unirmi al vostro team?",
+    "score": 0.03,
+    "toxic": false
+  },
+  {
+    "message": "spero ti bannino per sempre pezzo di merda",
+    "score": 0.95,
+    "toxic": true
+  },
+  {
+    "message": "sto per craftare un'armatura di diamante",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "sei il peggiore player che abbia mai visto",
+    "score": 0.76,
+    "toxic": true
+  },
+  {
+    "message": "andiamo al nether insieme?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma che schifo di costruzione decerebrato",
+    "score": 0.83,
+    "toxic": true
+  },
+  {
+    "message": "ho bisogno di legno per favore",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "cancellati dal server coglione",
+    "score": 0.91,
+    "toxic": true
+  },
+  {
+    "message": "bella farm automatica complimenti",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "ti ammazzo e ti spawno killo",
+    "score": 0.88,
+    "toxic": true
+  },
+  {
+    "message": "qualcuno sa dove spawna lo stronghold?",
+    "score": 0.03,
+    "toxic": false
+  },
+  {
+    "message": "sei solo un bambino ritardato",
+    "score": 0.94,
+    "toxic": true
+  },
+  {
+    "message": "nice castle bro",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "ma vaffanculo te e la tua famiglia",
+    "score": 0.96,
+    "toxic": true
+  },
+  {
+    "message": "raid dell'ender dragon domani?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "smetti di fare grief handicappato",
+    "score": 0.93,
+    "toxic": true
+  },
+  {
+    "message": "ho craftato un beacon",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "ma muori male down di cromosomi",
+    "score": 0.98,
+    "toxic": true
+  },
+  {
+    "message": "qualcuno vuole tradare emeraldi?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ti grifo tutto quello che hai costruito",
+    "score": 0.87,
+    "toxic": true
+  },
+  {
+    "message": "ottimo il vostro villaggio",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "sei proprio una merda a minecraft",
+    "score": 0.89,
+    "toxic": true
+  },
+  {
+    "message": "serve aiuto per il wither?",
+    "score": 0.03,
+    "toxic": false
+  },
+  {
+    "message": "spero ti venga il cancro mentre giochi",
+    "score": 1.0,
+    "toxic": true
+  },
+  {
+    "message": "ho trovato un dungeon spawner",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma levati dai piedi scemo del cazzo",
+    "score": 0.92,
+    "toxic": true
+  },
+  {
+    "message": "qualcuno ha una mappa del server?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "fai veramente schifo a buildare",
+    "score": 0.78,
+    "toxic": true
+  },
+  {
+    "message": "andiamo a esplorare la jungle?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ti reporto e ti bannano per sempre idiota",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "bella redstone quella",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "sei il cancro di questo server",
+    "score": 0.91,
+    "toxic": true
+  },
+  {
+    "message": "ho bisogno di ossidiana per il portale",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma vai a piangere da mammina nabbo",
+    "score": 0.79,
+    "toxic": true
+  },
+  {
+    "message": "qualcuno ha visto il mio cavallo?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ti auguro di morire male pezzo di merda",
+    "score": 0.99,
+    "toxic": true
+  },
+  {
+    "message": "condividiamo le risorse del mining?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma impara a giocare mongoloide",
+    "score": 0.96,
+    "toxic": true
+  },
+  {
+    "message": "ottima quella trap mob",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "sei solo spazzatura umana inutile",
+    "score": 0.93,
+    "toxic": true
+  },
+  {
+    "message": "ho enchantato la spada con sharpness V",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "ma che cazzo stai facendo coglione",
+    "score": 0.90,
+    "toxic": true
+  },
+  {
+    "message": "qualcuno vuole fare pvp?",
+    "score": 0.03,
+    "toxic": false
+  },
+  {
+    "message": "ti spawno killo tutta la notte bastardo",
+    "score": 0.88,
+    "toxic": true
+  },
+  {
+    "message": "ho completato il mio castello",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "fai proprio pietà come builder down",
+    "score": 0.84,
+    "toxic": true
+  },
+  {
+    "message": "andiamo a cercare un villaggio?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "sei un peso morto cancellati",
+    "score": 0.86,
+    "toxic": true
+  },
+  {
+    "message": "bella skin quella",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "ma vai a quel paese ritardato",
+    "score": 0.89,
+    "toxic": true
+  },
+  {
+    "message": "serve aiuto con gli enchantments",
+    "score": 0.03,
+    "toxic": false
+  },
+  {
+    "message": "ti grifo la casa e ti ammazzo",
+    "score": 0.94,
+    "toxic": true
+  },
+  {
+    "message": "ho trovato un tempio nel deserto",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma smettila di giocare ciccione di merda",
+    "score": 0.95,
+    "toxic": true
+  },
+  {
+    "message": "qualcuno ha blaze rod extra?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "sei la vergogna del server nabbo",
+    "score": 0.81,
+    "toxic": true
+  },
+  {
+    "message": "fantastica quella costruzione",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "spero ti bannino e muori male",
+    "score": 0.97,
+    "toxic": true
+  },
+  {
+    "message": "andiamo a farmmare mob spawner?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma chi ti ha insegnato a giocare idiota",
+    "score": 0.83,
+    "toxic": true
+  },
+  {
+    "message": "bella texture pack quella",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "sei proprio un handicappato mentale",
+    "score": 0.97,
+    "toxic": true
+  },
+  {
+    "message": "qualcuno vuole scambiare pozioni?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ti grifo tutto e ti trollo decerebrato",
+    "score": 0.87,
+    "toxic": true
+  },
+  {
+    "message": "ho bisogno di ender pearl",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma vaffanculo griefer del cazzo",
+    "score": 0.94,
+    "toxic": true
+  },
+  {
+    "message": "ottimo lavoro sulla cattedrale",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "sei il giocatore più schifoso mai visto",
+    "score": 0.82,
+    "toxic": true
+  },
+  {
+    "message": "andiamo all'End insieme?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "impara a buildare prima di entrare qui",
+    "score": 0.68,
+    "toxic": true
+  },
+  {
+    "message": "ho craftato elytra nuove",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "ma levati il gioco dalle mani down",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "qualcuno vuole esplorare miniere?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ti auguro il cancro pezzo di merda",
+    "score": 1.0,
+    "toxic": true
+  },
+  {
+    "message": "bella quella pixel art",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "fai veramente schifo vai a morire",
+    "score": 0.96,
+    "toxic": true
+  },
+  {
+    "message": "ho trovato netherite finalmente",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "sei solo un troll inutile coglione",
+    "score": 0.88,
+    "toxic": true
+  },
+  {
+    "message": "andiamo a cercare slime chunks?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma quale rank hai comprato nabbo di merda",
+    "score": 0.86,
+    "toxic": true
+  },
+  {
+    "message": "grazie per l'aiuto ragazzi",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "spero ti venga un infarto davanti al PC",
+    "score": 0.98,
+    "toxic": true
+  },
+  {
+    "message": "qualcuno ha coordinate per slime farm?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "sei proprio spazzatura umana levati",
+    "score": 0.91,
+    "toxic": true
+  },
+  {
+    "message": "ci vediamo domani per continuare",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "ma muori ammazzato con tutta la famiglia",
+    "score": 0.99,
+    "toxic": true
+  },
+  {
+    "message": "bella sessione di gioco stasera",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "fai proprio pietà come persona e player",
+    "score": 0.84,
+    "toxic": true
+  },
+  {
+    "message": "ho finito la mia mega base",
+    "score": 0.01,
+    "toxic": false
+  }
+]

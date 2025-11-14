@@ -1,0 +1,487 @@
+[
+  {
+    "message": "gg wp, bella partita ragazzi!",
+    "score": 0.05,
+    "toxic": false
+  },
+  {
+    "message": "sei proprio un cane, cancellati",
+    "score": 0.92,
+    "toxic": true
+  },
+  {
+    "message": "qualcuno ha un microfono?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma vai a quel paese idiota",
+    "score": 0.88,
+    "toxic": true
+  },
+  {
+    "message": "aiuto in mid per favore",
+    "score": 0.03,
+    "toxic": false
+  },
+  {
+    "message": "sei il peggiore player che abbia mai visto",
+    "score": 0.75,
+    "toxic": true
+  },
+  {
+    "message": "nice shot!",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "ma smettila di feedare brutto noob",
+    "score": 0.82,
+    "toxic": true
+  },
+  {
+    "message": "proviamo a pushare insieme?",
+    "score": 0.04,
+    "toxic": false
+  },
+  {
+    "message": "spero ti bannino per sempre",
+    "score": 0.79,
+    "toxic": true
+  },
+  {
+    "message": "ottima strategia team",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "vai a morire trash",
+    "score": 0.98,
+    "toxic": true
+  },
+  {
+    "message": "ci vediamo alla prossima partita",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "ma che schifo di team",
+    "score": 0.71,
+    "toxic": true
+  },
+  {
+    "message": "healing necessario qui",
+    "score": 0.03,
+    "toxic": false
+  },
+  {
+    "message": "tu e tua madre siete dei falliti",
+    "score": 0.96,
+    "toxic": true
+  },
+  {
+    "message": "grazie per il revive",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "uninstalla il gioco decerebrato",
+    "score": 0.89,
+    "toxic": true
+  },
+  {
+    "message": "qualcuno vuole fare squadra?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "sei proprio una merda",
+    "score": 0.94,
+    "toxic": true
+  },
+  {
+    "message": "buona fortuna ragazzi",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "ma impara a giocare handicappato",
+    "score": 0.97,
+    "toxic": true
+  },
+  {
+    "message": "protezione sul punto B",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ti reporto brutto troll",
+    "score": 0.68,
+    "toxic": true
+  },
+  {
+    "message": "bella azione quella",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "che schifo di giocatore sei",
+    "score": 0.83,
+    "toxic": true
+  },
+  {
+    "message": "uso l'ultimate ora",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma fatti una vita down",
+    "score": 0.91,
+    "toxic": true
+  },
+  {
+    "message": "aspettatemi sto tornando",
+    "score": 0.03,
+    "toxic": false
+  },
+  {
+    "message": "spero tu muoia nel sonno",
+    "score": 0.99,
+    "toxic": true
+  },
+  {
+    "message": "ottimo lavoro di squadra",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "sei solo un peso morto inutile",
+    "score": 0.81,
+    "toxic": true
+  },
+  {
+    "message": "chi vuole tradare?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "fai veramente schifo a giocare",
+    "score": 0.78,
+    "toxic": true
+  },
+  {
+    "message": "rush B tutti insieme",
+    "score": 0.04,
+    "toxic": false
+  },
+  {
+    "message": "ma levati dai piedi scemo",
+    "score": 0.84,
+    "toxic": true
+  },
+  {
+    "message": "qualcuno ha pozioni extra?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "cancro di giocatore",
+    "score": 0.95,
+    "toxic": true
+  },
+  {
+    "message": "fantastico quel combo",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "ma vai a piangere da mammina",
+    "score": 0.73,
+    "toxic": true
+  },
+  {
+    "message": "serve backup punto C",
+    "score": 0.03,
+    "toxic": false
+  },
+  {
+    "message": "sei un handicappato mentale",
+    "score": 0.98,
+    "toxic": true
+  },
+  {
+    "message": "ripartiamo concentrati",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma che cazzo stai facendo idiota",
+    "score": 0.93,
+    "toxic": true
+  },
+  {
+    "message": "salviamo il tank",
+    "score": 0.03,
+    "toxic": false
+  },
+  {
+    "message": "ti auguro il cancro pezzo di merda",
+    "score": 1.0,
+    "toxic": true
+  },
+  {
+    "message": "bella quella mossa",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "giochi come un bambino ritardato",
+    "score": 0.96,
+    "toxic": true
+  },
+  {
+    "message": "andiamo per l'obiettivo",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma smetti di giocare ciccione di merda",
+    "score": 0.94,
+    "toxic": true
+  },
+  {
+    "message": "complimenti per quella kill",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "vi ammazzo tutti bastardi",
+    "score": 0.97,
+    "toxic": true
+  },
+  {
+    "message": "aspettiamo il resto del team",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma vaffanculo te e chi ti conosce",
+    "score": 0.92,
+    "toxic": true
+  },
+  {
+    "message": "proviamo la strategia A?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "sei la vergogna del server",
+    "score": 0.76,
+    "toxic": true
+  },
+  {
+    "message": "ottima difesa ragazzi",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "torna a giocare a minecraft bambino",
+    "score": 0.69,
+    "toxic": true
+  },
+  {
+    "message": "serve cover fuoco nemico",
+    "score": 0.03,
+    "toxic": false
+  },
+  {
+    "message": "ma chi ti ha insegnato a giocare coglione",
+    "score": 0.87,
+    "toxic": true
+  },
+  {
+    "message": "gg a tutti giocatori",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "spero tu crepi male",
+    "score": 0.99,
+    "toxic": true
+  },
+  {
+    "message": "bel clutch quello",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "sei solo un mongoloide inutile",
+    "score": 0.98,
+    "toxic": true
+  },
+  {
+    "message": "riorganizziamoci per il prossimo round",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma levati il PC dalle mani nabbo",
+    "score": 0.79,
+    "toxic": true
+  },
+  {
+    "message": "qualcuno ha munizioni?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "fai pena come giocatore e come persona",
+    "score": 0.85,
+    "toxic": true
+  },
+  {
+    "message": "ci serve uno healer",
+    "score": 0.03,
+    "toxic": false
+  },
+  {
+    "message": "vai a morire ammazzato cane",
+    "score": 0.99,
+    "toxic": true
+  },
+  {
+    "message": "fantastica quella play",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "ma sei down di cromosomi",
+    "score": 0.96,
+    "toxic": true
+  },
+  {
+    "message": "torniamo alla base",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "impara a giocare prima di parlare",
+    "score": 0.64,
+    "toxic": true
+  },
+  {
+    "message": "bella squadra stasera",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "sei il cancro di questo gioco",
+    "score": 0.93,
+    "toxic": true
+  },
+  {
+    "message": "andiamo insieme mid",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma quale rank hai comprato decerebrato",
+    "score": 0.82,
+    "toxic": true
+  },
+  {
+    "message": "serve supporto qui",
+    "score": 0.03,
+    "toxic": false
+  },
+  {
+    "message": "ti reporto e ti bannano pezzo di merda",
+    "score": 0.91,
+    "toxic": true
+  },
+  {
+    "message": "ottimo timing quello",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "sei proprio spazzatura umana",
+    "score": 0.94,
+    "toxic": true
+  },
+  {
+    "message": "prossima partita ranked?",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "ma muori male tu e tutta la tua famiglia",
+    "score": 1.0,
+    "toxic": true
+  },
+  {
+    "message": "bravi tutti keep it up",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "sei solo un tossico di merda",
+    "score": 0.88,
+    "toxic": true
+  },
+  {
+    "message": "copriamo il fianco destro",
+    "score": 0.03,
+    "toxic": false
+  },
+  {
+    "message": "fai veramente pietà nabbo schifoso",
+    "score": 0.86,
+    "toxic": true
+  },
+  {
+    "message": "ci vediamo domani ragazzi",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "ma vai a cagare down",
+    "score": 0.89,
+    "toxic": true
+  },
+  {
+    "message": "aspetto il vostro segnale",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "spero ti venga un infarto giocando",
+    "score": 0.98,
+    "toxic": true
+  },
+  {
+    "message": "grazie per la partita",
+    "score": 0.01,
+    "toxic": false
+  },
+  {
+    "message": "ma chi ti ha dato la licenza di giocare idiota",
+    "score": 0.84,
+    "toxic": true
+  },
+  {
+    "message": "regroup punto spawn",
+    "score": 0.02,
+    "toxic": false
+  },
+  {
+    "message": "sei il giocatore più schifoso mai visto",
+    "score": 0.81,
+    "toxic": true
+  },
+  {
+    "message": "bella partita a tutti",
+    "score": 0.01,
+    "toxic": false
+  }
+]

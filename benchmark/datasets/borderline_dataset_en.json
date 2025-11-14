@@ -1,0 +1,492 @@
+[
+  {
+    "message": "interesting strategy you got there",
+    "score": 0.4,
+    "toxic": false
+  },
+  {
+    "message": "wow, didn't expect that play",
+    "score": 0.35,
+    "toxic": false
+  },
+  {
+    "message": "you must be having an off day",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "that's certainly one way to do it",
+    "score": 0.45,
+    "toxic": false
+  },
+  {
+    "message": "bold choice right there",
+    "score": 0.4,
+    "toxic": false
+  },
+  {
+    "message": "maybe try something different next time",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "I see what you were trying to do",
+    "score": 0.45,
+    "toxic": false
+  },
+  {
+    "message": "not sure that was the best call",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "well that happened",
+    "score": 0.4,
+    "toxic": false
+  },
+  {
+    "message": "someone's feeling confident",
+    "score": 0.45,
+    "toxic": false
+  },
+  {
+    "message": "you might want to rethink that approach",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "that's a unique playstyle",
+    "score": 0.4,
+    "toxic": false
+  },
+  {
+    "message": "did you mean to do that?",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "fascinating decision making",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "we all have those games",
+    "score": 0.35,
+    "toxic": false
+  },
+  {
+    "message": "you're really going for it huh",
+    "score": 0.45,
+    "toxic": false
+  },
+  {
+    "message": "guess we're doing this now",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "bold of you to assume that would work",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "interesting interpretation of the meta",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "well you tried",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "that was a choice",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "creativity is important I guess",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "must be nice having that kind of confidence",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "you're really committed to that strategy",
+    "score": 0.45,
+    "toxic": false
+  },
+  {
+    "message": "not what I would've done but okay",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "your decision making is something else",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "are you sure about that?",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "well someone's optimistic",
+    "score": 0.45,
+    "toxic": false
+  },
+  {
+    "message": "I admire the confidence, if nothing else",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "that's definitely a playstyle",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "you do you I guess",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "didn't know we were playing like that",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "unconventional approach there",
+    "score": 0.4,
+    "toxic": false
+  },
+  {
+    "message": "you seem very sure of yourself",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "alright then, if you say so",
+    "score": 0.45,
+    "toxic": false
+  },
+  {
+    "message": "maybe watch a guide or something",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "that's one interpretation of how to play",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "we're all learning at different paces",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "I'm sure that made sense in your head",
+    "score": 0.65,
+    "toxic": true
+  },
+  {
+    "message": "not quite how that works but close",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "you've got spirit, I'll give you that",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "well at least you're trying",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "that was certainly an attempt",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "I guess everyone has their own style",
+    "score": 0.45,
+    "toxic": false
+  },
+  {
+    "message": "might want to think before you act next time",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "you're really making things interesting",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "that's a take",
+    "score": 0.45,
+    "toxic": false
+  },
+  {
+    "message": "you must have your reasons",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "well that's unfortunate",
+    "score": 0.4,
+    "toxic": false
+  },
+  {
+    "message": "maybe stick to what you know",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "you're full of surprises today",
+    "score": 0.45,
+    "toxic": false
+  },
+  {
+    "message": "there's always next game",
+    "score": 0.4,
+    "toxic": false
+  },
+  {
+    "message": "that's an interesting way to throw",
+    "score": 0.65,
+    "toxic": true
+  },
+  {
+    "message": "you're really showing us something",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "guess experience doesn't always help",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "I respect the attempt, sort of",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "that sure was something",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "you're playing your own game here",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "everyone learns eventually",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "didn't realize we were experimenting today",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "you're making this harder than it needs to be",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "that's a creative way to lose",
+    "score": 0.65,
+    "toxic": true
+  },
+  {
+    "message": "maybe save that strategy for practice mode",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "you seem confused",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "I think you misunderstood the objective",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "well you definitely did something",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "that's a way to play I suppose",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "not sure what you're going for but okay",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "you're certainly making an impression",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "that was bold, maybe too bold",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "I see you're trying something new",
+    "score": 0.45,
+    "toxic": false
+  },
+  {
+    "message": "not everyone can be good at everything",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "you're really committed to this approach",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "maybe this just isn't your game",
+    "score": 0.65,
+    "toxic": true
+  },
+  {
+    "message": "I appreciate the effort, truly",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "that's definitely a choice you made",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "you're testing the limits of that strategy",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "not quite sure what the plan was there",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "I guess that's one way to approach it",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "you're really keeping us guessing",
+    "score": 0.45,
+    "toxic": false
+  },
+  {
+    "message": "that was unexpected, and not in a good way",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "maybe take a break and come back fresh",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "you're really pushing boundaries today",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "I'm curious what you're thinking",
+    "score": 0.45,
+    "toxic": false
+  },
+  {
+    "message": "that's not quite how it's done",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "you must be really confident in that plan",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "we all start somewhere I guess",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "that's a learning experience for sure",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "you're really showing off your skills there",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "maybe reconsider your priorities",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "I don't think that's working out for you",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "you're trying something, that's for sure",
+    "score": 0.5,
+    "toxic": true
+  },
+  {
+    "message": "well that's an interesting take on teamwork",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "you've got a lot of confidence for someone in your position",
+    "score": 0.65,
+    "toxic": true
+  },
+  {
+    "message": "not everyone can carry I suppose",
+    "score": 0.6,
+    "toxic": true
+  },
+  {
+    "message": "that was creative, just not effective",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "you're making this memorable at least",
+    "score": 0.55,
+    "toxic": true
+  },
+  {
+    "message": "interesting priorities you've got",
+    "score": 0.55,
+    "toxic": true
+  }
+]
