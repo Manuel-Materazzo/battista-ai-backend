@@ -12,6 +12,7 @@ from .models import TestResult, TestSample
 from .config import (
     DEFAULT_API_URL,
     DEFAULT_DATA_FOLDER,
+    SAMPLES_PER_DATASET_LIMIT,
     TIMESTAMP_FORMAT,
     API_RATE_LIMIT_DELAY,
     SEPARATOR_WIDTH,
@@ -21,16 +22,23 @@ from .config import (
 class ToxicityModelTester:
     """Main test runner orchestrating the testing workflow"""
 
-    def __init__(self, api_url: str = DEFAULT_API_URL, data_folder: str = DEFAULT_DATA_FOLDER):
+    def __init__(
+        self,
+        api_url: str = DEFAULT_API_URL,
+        data_folder: str = DEFAULT_DATA_FOLDER,
+        samples_limit: int = SAMPLES_PER_DATASET_LIMIT,
+    ):
         """
         Initialize the tester.
 
         Args:
             api_url: URL of the moderation API endpoint
             data_folder: Path to folder containing dataset JSON files
+            samples_limit: Maximum number of samples to test per dataset (None for no limit)
         """
         self.api_url = api_url
         self.data_folder = data_folder
+        self.samples_limit = samples_limit
         self.all_results: List[TestResult] = []
         self.dataset_metrics: Dict[str, Dict] = {}
         self.api_client = APIClient(api_url)
@@ -61,15 +69,23 @@ class ToxicityModelTester:
             samples: Samples to test
             timestamp: Timestamp for output filenames
         """
+        # Apply limit if configured
+        limited_samples = samples
+        if self.samples_limit is not None:
+            limited_samples = samples[:self.samples_limit]
+        
         sep = "=" * SEPARATOR_WIDTH
         print(f"\n{sep}")
         print(f"Testing dataset: {dataset_name}")
-        print(f"Starting tests on {len(samples)} samples...")
+        total_samples = len(limited_samples)
+        print(f"Starting tests on {total_samples} samples...")
+        if self.samples_limit is not None and len(samples) > self.samples_limit:
+            print(f"(Limited from {len(samples)} total samples)")
         print(f"{sep}\n")
 
         results: List[TestResult] = []
-        for idx, sample in enumerate(samples, 1):
-            result = self._test_sample(idx, len(samples), sample, dataset_name)
+        for idx, sample in enumerate(limited_samples, 1):
+            result = self._test_sample(idx, total_samples, sample, dataset_name)
             if result:
                 results.append(result)
             time.sleep(API_RATE_LIMIT_DELAY)

@@ -7,6 +7,7 @@ API_RATE_LIMIT_DELAY = 0.1  # seconds between requests
 
 # Data Configuration
 DEFAULT_DATA_FOLDER = "./datasets"
+SAMPLES_PER_DATASET_LIMIT = 2500  # Set to a number to limit samples per dataset, None for no limit
 
 # Output Configuration
 TIMESTAMP_FORMAT = "%Y%m%d_%H%M%S"

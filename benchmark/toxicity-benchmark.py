@@ -7,7 +7,12 @@ testing it against datasets and generating detailed metrics and reports.
 """
 
 from toxicity_benchmark import ToxicityModelTester
-from toxicity_benchmark.config import DEFAULT_API_URL, DEFAULT_DATA_FOLDER, SEPARATOR_WIDTH
+from toxicity_benchmark.config import (
+    DEFAULT_API_URL,
+    DEFAULT_DATA_FOLDER,
+    SAMPLES_PER_DATASET_LIMIT,
+    SEPARATOR_WIDTH,
+)
 
 
 def main():
@@ -16,9 +21,15 @@ def main():
     print("TOXICITY MODEL TESTER")
     print("=" * SEPARATOR_WIDTH)
     print(f"\nAPI Endpoint: {DEFAULT_API_URL}")
-    print(f"Data Folder: {DEFAULT_DATA_FOLDER}\n")
+    print(f"Data Folder: {DEFAULT_DATA_FOLDER}")
+    if SAMPLES_PER_DATASET_LIMIT is not None:
+        print(f"Samples per dataset limit: {SAMPLES_PER_DATASET_LIMIT}")
 
-    tester = ToxicityModelTester(api_url=DEFAULT_API_URL, data_folder=DEFAULT_DATA_FOLDER)
+    tester = ToxicityModelTester(
+        api_url=DEFAULT_API_URL,
+        data_folder=DEFAULT_DATA_FOLDER,
+        samples_limit=SAMPLES_PER_DATASET_LIMIT,
+    )
     tester.run_tests()
 
     print(f"\n{'='*SEPARATOR_WIDTH}")
