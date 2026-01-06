@@ -41,6 +41,7 @@ class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
             pw.this.model,
             pw.this.filters,
             pw.this.return_context_docs,
+            pw.this.return_prompt,
             pw.this.query_id,
             doc=pw.this.docs,
             reranker_score=self.reranker(pw.this.docs["text"], pw.this.prompt)
@@ -61,6 +62,7 @@ class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
             model=pw.reducers.any(pw.this.model),
             filters=pw.reducers.any(pw.this.filters),
             return_context_docs=pw.reducers.any(pw.this.return_context_docs),
+            return_prompt=pw.reducers.any(pw.this.return_prompt),
             docs=pw.reducers.tuple(pw.this.doc_with_score),
         ).with_id(pw.this.query_id)
 
@@ -104,10 +106,25 @@ class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
 
         pw_ai_results = pw_ai_results.await_futures()
 
+        @pw.udf
+        def custom_prepare_RAG_response(
+                prompt: str, response: str, docs: list[dict], return_context_docs: bool, return_prompt: bool
+        ) -> pw.Json:
+            api_response: dict = {"response": response}
+            if return_context_docs:
+                api_response["context_docs"] = docs
+            if return_prompt:
+                api_response["prompt"] = prompt
+
+            return pw.Json(api_response)
+
         pw_ai_results += pw_ai_results.select(
-            result=_prepare_RAG_response(
-                pw.this.response, pw.this.docs,
-                pw.this.return_context_docs
+            result=custom_prepare_RAG_response(
+                pw.this.rag_prompt,
+                pw.this.response,
+                pw.this.docs,
+                pw.this.return_context_docs,
+                pw.this.return_prompt
             )
         )
 

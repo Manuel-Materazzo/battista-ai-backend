@@ -8,6 +8,7 @@ from processors.chat_moderator import ChatModerator
 
 logger = logging.getLogger(__name__)
 
+
 class QAScopedRestServer(BaseRestServer):
     """
     Creates a REST Server for answering queries to a given instance of ``BaseQuestionAnswerer``.
@@ -33,6 +34,13 @@ class QAScopedRestServer(BaseRestServer):
     ):
         super().__init__(host, port, **rest_kwargs)
 
+        class CustomAnswerQuerySchema(pw.Schema):
+            prompt: str
+            filters: str | None = pw.column_definition(default_value=None)
+            model: str | None = pw.column_definition(default_value=rag_question_answerer.llm.model)
+            return_context_docs: bool = pw.column_definition(default_value=False)
+            return_prompt: bool = pw.column_definition(default_value=False)
+
         logger.info("Inizializing QAScopedRestServer")
 
         self.serve(
@@ -43,7 +51,7 @@ class QAScopedRestServer(BaseRestServer):
         )
         self.serve(
             "/v2/answer",
-            rag_question_answerer.AnswerQuerySchema,
+            CustomAnswerQuerySchema,
             rag_question_answerer.answer_query,
             **rest_kwargs,
         )
