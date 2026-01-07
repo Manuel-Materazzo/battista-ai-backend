@@ -23,10 +23,10 @@ jobs:
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@main
         with:
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
+          android: true # 12gb
+          dotnet: true # 3.9gb
+          haskell: true # 6.2gb
+          large-packages: false # 4.7gb, takes a lot of time
           docker-images: false
           swap-storage: false
           # this might remove tools that are actually needed, but frees about 6 GB
