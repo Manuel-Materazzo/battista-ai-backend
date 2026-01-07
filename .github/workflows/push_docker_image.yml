@@ -20,6 +20,18 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
 
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: false
+          swap-storage: false
+          # this might remove tools that are actually needed, but frees about 6 GB
+          tool-cache: false
+
       - name: 'Build Image'
         run: |
           docker build . --tag ghcr.io/manuel-materazzo/battista-ai-backend:latest
