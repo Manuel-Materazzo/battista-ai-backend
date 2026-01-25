@@ -90,6 +90,8 @@ $reranker: !pw.xpacks.llm.rerankers.CrossEncoderReranker
 # Specifies the embedder model for converting text into embeddings.
 $embedder: !pw.xpacks.llm.embedders.SentenceTransformerEmbedder
   model: $embedding_model
+  capacity: 1
+  batch_size: 2
   trust_remote_code: True
   call_kwargs:
     show_progress_bar: False
@@ -102,6 +104,7 @@ chat_moderator: !processors.chat_moderator.ChatModerator
 
 # Configures the parser for processing and extracting information from documents.
 $parser: !pw.xpacks.llm.parsers.UnstructuredParser
+  capacity: 1
   cache_strategy: !pw.udfs.DefaultCache { }
 
 # Sets up the retriever factory for indexing and retrieving documents.
