@@ -1,8 +1,10 @@
 # Copyright © 2024 Pathway
 
+import base64
 import logging
 import os
 
+import requests
 import streamlit as st
 from dotenv import load_dotenv
 from pathway.xpacks.llm.document_store import IndexingStatus
@@ -67,8 +69,11 @@ div[data-testid="stHorizontalBlock"]:has(button[data-testid="baseButton-primary"
     unsafe_allow_html=True,
 )
 
-
-question = st.text_input(label="", placeholder="Ask your question?")
+col_input, col_toggle = st.columns([4, 1])
+with col_input:
+    question = st.text_input(label="", placeholder="Ask your question?")
+with col_toggle:
+    voice_output = st.toggle("🔊 Voice response", value=False)
 
 
 def get_indexed_files(metadata_list: list[dict], opt_key: str) -> list:
@@ -147,7 +152,6 @@ css = """
     object-fit: cover;
     border-radius: 5px;
 }
-
 .slider-wrapper {
     display: flex;
     justify-content: center;
@@ -169,26 +173,49 @@ if question:
         {
             "_type": "search_request_event",
             "query": question,
+            "voice_output": voice_output,
         }
     )
 
     with st.spinner("Retrieving response..."):
-        api_response = conn.answer(question, return_context_docs=True)
-        response = api_response["response"]
-        context_docs = api_response["context_docs"]
+        if voice_output:
+            resp = requests.post(
+                f"http://{PATHWAY_HOST}:{PATHWAY_PORT}/v2/answer",
+                json={
+                    "prompt": question,
+                    "return_context_docs": True,
+                    "return_audio": True,
+                },
+                timeout=60,
+            )
+            api_response = resp.json()
+        else:
+            api_response = conn.answer(question, return_context_docs=True)
+
+        response = api_response.get("response", "")
+        context_docs = api_response.get("context_docs", [])
+        audio_b64 = api_response.get("audio")
+        audio_mime_type = api_response.get("audio_mime_type", "audio/wav")
 
     logger.info(
         {
             "_type": "search_response_event",
             "query": question,
             "response": type(response),
+            "has_audio": bool(audio_b64),
         }
     )
 
-    logger.info(type(response))
-
     st.markdown(f"**Answering question:** {question}")
     st.markdown(f"""{response}""")
+
+    if audio_b64:
+        try:
+            audio_bytes = base64.b64decode(audio_b64)
+            st.audio(audio_bytes, format=audio_mime_type)
+        except Exception as e:
+            logger.error("Failed to decode and play audio: %s", e)
+
     with st.expander(label="Context documents"):
         st.markdown("Documents sent to LLM as context:\n")
         for i, doc in enumerate(context_docs):

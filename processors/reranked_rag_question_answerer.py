@@ -1,29 +1,38 @@
 import logging
+from typing import Any
+
 import pathway as pw
 from pathway.xpacks.llm import llms, rerankers
-from pathway.xpacks.llm.question_answering import BaseRAGQuestionAnswerer, _prepare_RAG_response, _limit_documents
+from pathway.xpacks.llm.question_answering import (
+    BaseRAGQuestionAnswerer,
+    _limit_documents,
+    _prepare_RAG_response,
+)
 
 logger = logging.getLogger(__name__)
 
 
 class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
     """
-    Enhanced RAG Question Answerer with reranking support.
+    Enhanced RAG Question Answerer with reranking support and multimodal audio output.
 
-    This implementation uses a simpler approach that works within Pathway's constraints.
+    This implementation extends BaseRAGQuestionAnswerer to support multi-stage retrieval
+    with reranking, as well as audio response presentation when requested.
     """
 
     def __init__(
-            self,
-            llm,
-            indexer,
-            reranker=None,
-            rerank_topk=None,
-            **kwargs
+        self,
+        llm,
+        indexer,
+        reranker=None,
+        rerank_topk=None,
+        **kwargs,
     ):
         super().__init__(llm=llm, indexer=indexer, **kwargs)
         self.reranker = reranker
-        self.rerank_topk = rerank_topk if rerank_topk is not None else max(1, self.search_topk // 2)
+        self.rerank_topk = (
+            rerank_topk if rerank_topk is not None else max(1, self.search_topk // 2)
+        )
 
     def _apply_reranking(self, pw_ai_results: pw.Table) -> pw.Table:
         """Apply reranking to retrieved documents."""
@@ -33,7 +42,9 @@ class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
             return {**doc.as_dict(), "reranker_score": score}
 
         # Flatten docs into rows
-        pw_ai_results_exploded = pw_ai_results.flatten(pw_ai_results.docs, origin_id='query_id')
+        pw_ai_results_exploded = pw_ai_results.flatten(
+            pw_ai_results.docs, origin_id="query_id"
+        )
 
         # Apply reranker
         pw_ai_results_scored = pw_ai_results_exploded.select(
@@ -42,9 +53,10 @@ class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
             pw.this.filters,
             pw.this.return_context_docs,
             pw.this.return_prompt,
+            pw.this.return_audio,
             pw.this.query_id,
             doc=pw.this.docs,
-            reranker_score=self.reranker(pw.this.docs["text"], pw.this.prompt)
+            reranker_score=self.reranker(pw.this.docs["text"], pw.this.prompt),
         )
 
         pw_ai_results_scored = pw_ai_results_scored.await_futures()
@@ -52,19 +64,26 @@ class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
         # Add score and sort
         pw_ai_results_scored = pw_ai_results_scored.with_columns(
             sort_key=-pw.this.reranker_score,
-            doc_with_score=add_score_to_doc(pw.this.doc, pw.this.reranker_score)
+            doc_with_score=add_score_to_doc(pw.this.doc, pw.this.reranker_score),
         )
 
         # Reassemble documents
-        pw_ai_results = pw_ai_results_scored.groupby(pw.this.query_id, sort_by=pw.this.sort_key).reduce(
-            query_id=pw.this.query_id,
-            prompt=pw.reducers.any(pw.this.prompt),
-            model=pw.reducers.any(pw.this.model),
-            filters=pw.reducers.any(pw.this.filters),
-            return_context_docs=pw.reducers.any(pw.this.return_context_docs),
-            return_prompt=pw.reducers.any(pw.this.return_prompt),
-            docs=pw.reducers.tuple(pw.this.doc_with_score),
-        ).with_id(pw.this.query_id)
+        pw_ai_results = (
+            pw_ai_results_scored.groupby(
+                pw.this.query_id, sort_by=pw.this.sort_key
+            )
+            .reduce(
+                query_id=pw.this.query_id,
+                prompt=pw.reducers.any(pw.this.prompt),
+                model=pw.reducers.any(pw.this.model),
+                filters=pw.reducers.any(pw.this.filters),
+                return_context_docs=pw.reducers.any(pw.this.return_context_docs),
+                return_prompt=pw.reducers.any(pw.this.return_prompt),
+                return_audio=pw.reducers.any(pw.this.return_audio),
+                docs=pw.reducers.tuple(pw.this.doc_with_score),
+            )
+            .with_id(pw.this.query_id)
+        )
 
         # Keep only top k
         return pw_ai_results.with_columns(
@@ -73,7 +92,13 @@ class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
 
     @pw.table_transformer
     def answer_query(self, pw_ai_queries: pw.Table) -> pw.Table:
-        """Answer a question based on the available information with document reduction."""
+        """Answer a question based on the available information with document reduction and optional audio output."""
+
+        # Ensure return_audio column exists in query table
+        if "return_audio" not in pw_ai_queries.schema:
+            pw_ai_queries = pw_ai_queries.with_columns(
+                return_audio=pw.cast(bool, False)
+            )
 
         pw_ai_results = pw_ai_queries + self.indexer.retrieve_query(
             pw_ai_queries.select(
@@ -97,20 +122,62 @@ class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
             rag_prompt=self.prompt_udf(pw.this.context, pw.this.prompt)
         )
 
-        pw_ai_results += pw_ai_results.select(
-            response=self.llm(
-                llms.prompt_chat_single_qa(pw.this.rag_prompt),
-                model=pw.this.model,
-            )
+        accepts_audio = (
+            hasattr(self.llm, "_accepts_call_arg")
+            and self.llm._accepts_call_arg("return_audio")
         )
+
+        if accepts_audio:
+            pw_ai_results += pw_ai_results.select(
+                response=self.llm(
+                    llms.prompt_chat_single_qa(pw.this.rag_prompt),
+                    model=pw.this.model,
+                    return_audio=pw.this.return_audio,
+                )
+            )
+        else:
+            pw_ai_results += pw_ai_results.select(
+                response=self.llm(
+                    llms.prompt_chat_single_qa(pw.this.rag_prompt),
+                    model=pw.this.model,
+                )
+            )
 
         pw_ai_results = pw_ai_results.await_futures()
 
         @pw.udf
         def custom_prepare_RAG_response(
-                prompt: str, response: str, docs: list[dict], return_context_docs: bool, return_prompt: bool
+            prompt: str,
+            response: Any,
+            docs: list[dict],
+            return_context_docs: bool,
+            return_prompt: bool,
+            return_audio: bool = False,
         ) -> pw.Json:
-            api_response: dict = {"response": response}
+            api_response: dict = {}
+
+            if isinstance(response, dict):
+                api_response["response"] = (
+                    response.get("text") or response.get("response", "")
+                )
+                if return_audio or "audio" in response:
+                    if "audio" in response:
+                        api_response["audio"] = response["audio"]
+                    if "audio_mime_type" in response:
+                        api_response["audio_mime_type"] = response["audio_mime_type"]
+            elif isinstance(response, pw.Json):
+                resp_dict = response.as_dict()
+                api_response["response"] = (
+                    resp_dict.get("text") or resp_dict.get("response", "")
+                )
+                if return_audio or "audio" in resp_dict:
+                    if "audio" in resp_dict:
+                        api_response["audio"] = resp_dict["audio"]
+                    if "audio_mime_type" in resp_dict:
+                        api_response["audio_mime_type"] = resp_dict["audio_mime_type"]
+            else:
+                api_response["response"] = str(response) if response is not None else ""
+
             if return_context_docs:
                 api_response["context_docs"] = docs
             if return_prompt:
@@ -124,7 +191,8 @@ class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
                 pw.this.response,
                 pw.this.docs,
                 pw.this.return_context_docs,
-                pw.this.return_prompt
+                pw.this.return_prompt,
+                pw.this.return_audio,
             )
         )
 

@@ -1,6 +1,7 @@
 import logging
-import pathway as pw
 from typing import Callable
+
+import pathway as pw
 from pathway.xpacks.llm.question_answering import BaseQuestionAnswerer
 from pathway.xpacks.llm.servers import BaseRestServer
 
@@ -12,36 +13,42 @@ logger = logging.getLogger(__name__)
 class QAScopedRestServer(BaseRestServer):
     """
     Creates a REST Server for answering queries to a given instance of ``BaseQuestionAnswerer``.
-    It exposes four endpoints:
-    - ``/v1/retrieve`` which is answered using ``retrieve`` method,
-    - ``/v2/answer`` which is answered using ``answer_query`` method,
+    It exposes endpoints:
+    - ``/v1/retrieve``: document retrieval
+    - ``/v2/answer``: RAG question answering with optional audio generation
+    - ``/v2/list_documents``: list documents and indexing status
+    - ``/v1/moderate``: chat moderation (optional)
 
     Args:
         host: host on which server will run
         port: port on which server will run
         rag_question_answerer: instance of ``BaseQuestionAnswerer`` which is used
             to answer queries received in the endpoints.
+        chat_moderator: optional instance of ``ChatModerator``
         rest_kwargs: optional kwargs to be passed to ``pw.io.http.rest_connector``
     """
 
     def __init__(
-            self,
-            host: str,
-            port: int,
-            rag_question_answerer: BaseQuestionAnswerer,
-            chat_moderator: ChatModerator | None = None,
-            **rest_kwargs,
+        self,
+        host: str,
+        port: int,
+        rag_question_answerer: BaseQuestionAnswerer,
+        chat_moderator: ChatModerator | None = None,
+        **rest_kwargs,
     ):
         super().__init__(host, port, **rest_kwargs)
 
         class CustomAnswerQuerySchema(pw.Schema):
             prompt: str
             filters: str | None = pw.column_definition(default_value=None)
-            model: str | None = pw.column_definition(default_value=rag_question_answerer.llm.model)
+            model: str | None = pw.column_definition(
+                default_value=rag_question_answerer.llm.model
+            )
             return_context_docs: bool = pw.column_definition(default_value=False)
             return_prompt: bool = pw.column_definition(default_value=False)
+            return_audio: bool = pw.column_definition(default_value=False)
 
-        logger.info("Inizializing QAScopedRestServer")
+        logger.info("Initializing QAScopedRestServer")
 
         self.serve(
             "/v1/retrieve",
@@ -71,11 +78,11 @@ class QAScopedRestServer(BaseRestServer):
             )
 
     def serve(
-            self,
-            route: str,
-            schema: type[pw.Schema],
-            handler: Callable[[pw.Table], pw.Table],
-            **additional_endpoint_kwargs,
+        self,
+        route: str,
+        schema: type[pw.Schema],
+        handler: Callable[[pw.Table], pw.Table],
+        **additional_endpoint_kwargs,
     ):
         queries, writer = pw.io.http.rest_connector(
             webserver=self.webserver,
