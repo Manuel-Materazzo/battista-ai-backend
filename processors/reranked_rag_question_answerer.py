@@ -68,26 +68,42 @@ class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
         )
 
         # Reassemble documents
-        pw_ai_results = (
+        pw_ai_results_reranked = (
             pw_ai_results_scored.groupby(
                 pw.this.query_id, sort_by=pw.this.sort_key
             )
             .reduce(
                 query_id=pw.this.query_id,
-                prompt=pw.reducers.any(pw.this.prompt),
-                model=pw.reducers.any(pw.this.model),
-                filters=pw.reducers.any(pw.this.filters),
-                return_context_docs=pw.reducers.any(pw.this.return_context_docs),
-                return_prompt=pw.reducers.any(pw.this.return_prompt),
-                return_audio=pw.reducers.any(pw.this.return_audio),
                 docs=pw.reducers.tuple(pw.this.doc_with_score),
             )
             .with_id(pw.this.query_id)
         )
 
         # Keep only top k
-        return pw_ai_results.with_columns(
+        pw_ai_results_reranked = pw_ai_results_reranked.with_columns(
             docs=_limit_documents(pw.this.docs, k=self.rerank_topk)
+        )
+
+        @pw.udf
+        def coalesce_docs(reranked: Any, original: Any) -> tuple:
+            if reranked is not None:
+                return tuple(reranked)
+            if original is not None:
+                return tuple(original)
+            return ()
+
+        # Join back with original table to ensure queries with 0 retrieved documents are never dropped
+        return pw_ai_results.join_left(
+            pw_ai_results_reranked,
+            id=pw_ai_results.id,
+        ).select(
+            pw.left.prompt,
+            pw.left.model,
+            pw.left.filters,
+            pw.left.return_context_docs,
+            pw.left.return_prompt,
+            pw.left.return_audio,
+            docs=coalesce_docs(pw.right.docs, pw.left.docs),
         )
 
     @pw.table_transformer
@@ -95,7 +111,12 @@ class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
         """Answer a question based on the available information with document reduction and optional audio output."""
 
         # Ensure return_audio column exists in query table
-        if "return_audio" not in pw_ai_queries.schema:
+        has_return_audio = hasattr(pw_ai_queries, "return_audio") or (
+            hasattr(pw_ai_queries, "schema")
+            and hasattr(pw_ai_queries.schema, "__columns__")
+            and "return_audio" in pw_ai_queries.schema.__columns__
+        )
+        if not has_return_audio:
             pw_ai_queries = pw_ai_queries.with_columns(
                 return_audio=pw.cast(bool, False)
             )
