@@ -28,7 +28,7 @@ $sources:
 # https://pathway.com/developers/templates/rag-customization/llm-chats
 
 
-$llm_model: "openai/gemma-3-4b-it-qat"
+$llm_model: "gemini-3.8-live"
 $llm_rotate_model_list: ["openai/gemma-3-4b-it-qat", "openai/gemma-2-9b-it-qat"]
 $llm_api_base: "http://host.docker.internal:1234/v1"
 $llm_api_key: "fake"
@@ -90,7 +90,6 @@ $reranker: !pw.xpacks.llm.rerankers.CrossEncoderReranker
 # Specifies the embedder model for converting text into embeddings.
 $embedder: !pw.xpacks.llm.embedders.SentenceTransformerEmbedder
   model: $embedding_model
-  capacity: 1
   batch_size: 2
   trust_remote_code: True
   call_kwargs:
@@ -104,7 +103,6 @@ chat_moderator: !processors.chat_moderator.ChatModerator
 
 # Configures the parser for processing and extracting information from documents.
 $parser: !pw.xpacks.llm.parsers.UnstructuredParser
-  capacity: 1
   cache_strategy: !pw.udfs.DefaultCache { }
 
 # Sets up the retriever factory for indexing and retrieving documents.
@@ -112,7 +110,7 @@ $retriever_factory: !pw.stdlib.indexing.UsearchKnnFactory
   reserved_space: 1000
   embedder: $embedder
   metric: !pw.stdlib.indexing.USearchMetricKind.COS
-  
+
 # Manages the storage and retrieval of documents for the RAG template.
 $document_store: !pw.xpacks.llm.document_store.DocumentStore
   docs: $sources
@@ -120,14 +118,24 @@ $document_store: !pw.xpacks.llm.document_store.DocumentStore
   splitter: $splitter
   retriever_factory: $retriever_factory
 
-$llm: !pw.xpacks.llm.llms.LiteLLMChat
+# Classic text only interface
+#$llm: !pw.xpacks.llm.llms.LiteLLMChat
+#  model: $llm_model
+#  retry_strategy: !udfs.model_rotate_retry_strategy.ModelRotateRetryStrategy
+#    model_list: $llm_rotate_model_list
+#  cache_strategy: !pw.udfs.DefaultCache { }
+#  temperature: 0
+#  api_base: $llm_api_base
+#  api_key: $llm_api_key
+
+# Voice and text interface
+$llm: !connectors.gemini_live_chat.GeminiLiveChat
   model: $llm_model
-  retry_strategy: !udfs.model_rotate_retry_strategy.ModelRotateRetryStrategy
-    model_list: $llm_rotate_model_list
-  cache_strategy: !pw.udfs.DefaultCache { }
-  temperature: 0
-  api_base: $llm_api_base
   api_key: $llm_api_key
+  voice_name: "Puck"
+  audio_format: "wav"
+  return_audio: false  # Can be requested on demand per query
+  temperature: 0.2
 
 # Configures the question-answering component using the RAG approach.
 # The component builds a RAG over an index.
