@@ -208,3 +208,76 @@ async def test_rest_transport():
         assert result["audio"] != ""
         assert result["audio_mime_type"] == "audio/wav"
 
+
+@pytest.mark.asyncio
+async def test_stream_generator():
+    chat = GeminiLiveChat(api_key="fake-key", return_audio=True)
+
+    fake_pcm = b"\x10\x00" * 20
+    fake_pcm_b64 = base64.b64encode(fake_pcm).decode("ascii")
+
+    async def fake_websocket_call(
+        prompt, model, api_key, api_base, voice_name, return_audio, audio_format, system_instruction, temperature, chunk_callback=None
+    ):
+        if chunk_callback:
+            await chunk_callback({"type": "text", "delta": "Chunk 1 "})
+            await chunk_callback({"type": "text", "delta": "Chunk 2"})
+            await chunk_callback({"type": "audio", "data": fake_pcm_b64, "pcm_bytes": fake_pcm, "mime_type": "audio/pcm;rate=24000"})
+        return "Chunk 1 Chunk 2", "UklGRiQAAABXQVZF", 24000
+
+    with patch.object(chat, "_call_live_websocket", side_effect=fake_websocket_call):
+        streamed_events = []
+        async for event in chat.stream("Hello streaming", return_audio=True):
+            streamed_events.append(event)
+
+        assert len(streamed_events) == 4
+        assert streamed_events[0] == {"type": "text", "delta": "Chunk 1 "}
+        assert streamed_events[1] == {"type": "text", "delta": "Chunk 2"}
+        assert streamed_events[2]["type"] == "audio"
+        assert streamed_events[3]["type"] == "done"
+        assert streamed_events[3]["response"] == "Chunk 1 Chunk 2"
+        assert streamed_events[3]["audio"] == "UklGRiQAAABXQVZF"
+
+
+@pytest.mark.asyncio
+async def test_api_key_resolution_and_validation():
+    # 1. Error when no key or only fake key is provided and no env var
+    chat_fake = GeminiLiveChat(api_key="fake")
+    with patch.dict("os.environ", {}, clear=True):
+        with pytest.raises(ValueError, match="Gemini API key is required"):
+            await chat_fake.__wrapped__("test")
+
+    # 2. When api_key is fake but GEMINI_API_KEY is in environment, env var is used
+    with patch.dict("os.environ", {"GEMINI_API_KEY": "real-env-key"}):
+        with patch.object(
+            chat_fake,
+            "_call_live_websocket",
+            new=AsyncMock(return_value=("Env key response", None, 24000)),
+        ) as mock_call:
+            res = await chat_fake.__wrapped__("test")
+            assert res == "Env key response"
+            # Verify the resolved real key was passed to _call_live_websocket
+            assert mock_call.call_args.kwargs["api_key"] == "real-env-key"
+
+
+@pytest.mark.asyncio
+async def test_websocket_fallback_to_rest_on_error():
+    chat = GeminiLiveChat(api_key="test-key", transport="websocket")
+
+    with patch.object(
+        chat,
+        "_call_live_websocket",
+        side_effect=RuntimeError("WebSocket connection refused"),
+    ):
+        with patch.object(
+            chat,
+            "_call_rest",
+            new=AsyncMock(return_value=("REST fallback response", None, 24000)),
+        ) as mock_rest:
+            res = await chat.__wrapped__("test fallback")
+            assert res == "REST fallback response"
+            mock_rest.assert_called_once()
+
+
+
+

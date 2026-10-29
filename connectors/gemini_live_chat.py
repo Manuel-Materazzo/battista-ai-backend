@@ -1,11 +1,13 @@
 import asyncio
 import base64
 import copy
+import inspect
 import io
 import json
 import logging
 import os
 import wave
+from collections.abc import AsyncGenerator, Callable
 from typing import Any, Iterable, Literal
 
 import pathway as pw
@@ -119,15 +121,11 @@ class GeminiLiveChat(BaseChat):
                 executor = pw.udfs.fully_async_executor(capacity=capacity, retry_strategy=retry)
             else:
                 executor = pw.udfs.async_executor(capacity=capacity, retry_strategy=retry)
-            super().__init__(executor=executor, cache_strategy=cache_strategy)
+            super().__init__(executor=executor, cache_strategy=cache_strategy, return_type=Any)
         else:
             super().__init__()
 
-        self.api_key = (
-            api_key
-            or os.environ.get("GEMINI_API_KEY")
-            or os.environ.get("GOOGLE_API_KEY")
-        )
+        self.api_key = api_key
         self.api_base = api_base
         self.voice_name = voice_name
         self.audio_format = audio_format
@@ -140,6 +138,7 @@ class GeminiLiveChat(BaseChat):
 
         self.kwargs: dict[str, Any] = {
             "model": model,
+            "api_key": api_key,
             "voice_name": voice_name,
             "audio_format": audio_format,
             "return_audio": return_audio,
@@ -155,6 +154,7 @@ class GeminiLiveChat(BaseChat):
         """Indicate supported query-time keyword arguments."""
         return arg_name in {
             "model",
+            "api_key",
             "return_audio",
             "voice_name",
             "temperature",
@@ -190,6 +190,7 @@ class GeminiLiveChat(BaseChat):
         audio_format: str,
         system_instruction: str | None,
         temperature: float | None,
+        chunk_callback: Callable[[dict[str, Any]], Any] | None = None,
     ) -> tuple[str, str | None, int]:
         """Bidirectional WebSocket streaming to Gemini Live API (BidiGenerateContent)."""
         import websockets
@@ -267,16 +268,29 @@ class GeminiLiveChat(BaseChat):
                     sc = msg["serverContent"]
 
                     # Extract transcript from outputAudioTranscription
+                    text_delta = ""
                     if "outputTranscription" in sc and "text" in sc["outputTranscription"]:
-                        transcript_parts.append(sc["outputTranscription"]["text"])
+                        text_delta = sc["outputTranscription"]["text"]
                     elif "outputAudioTranscription" in sc and "text" in sc["outputAudioTranscription"]:
-                        transcript_parts.append(sc["outputAudioTranscription"]["text"])
+                        text_delta = sc["outputAudioTranscription"]["text"]
+
+                    if text_delta:
+                        transcript_parts.append(text_delta)
+                        if chunk_callback:
+                            res = chunk_callback({"type": "text", "delta": text_delta})
+                            if inspect.isawaitable(res):
+                                await res
 
                     # Extract text or audio from modelTurn parts
                     if "modelTurn" in sc:
                         for part in sc["modelTurn"].get("parts", []):
                             if "text" in part:
-                                transcript_parts.append(part["text"])
+                                part_text = part["text"]
+                                transcript_parts.append(part_text)
+                                if chunk_callback:
+                                    res = chunk_callback({"type": "text", "delta": part_text})
+                                    if inspect.isawaitable(res):
+                                        await res
                             if "inlineData" in part:
                                 inline = part["inlineData"]
                                 mime = inline.get("mimeType", "")
@@ -287,7 +301,17 @@ class GeminiLiveChat(BaseChat):
                                         pass
                                 chunk_b64 = inline.get("data", "")
                                 if chunk_b64:
-                                    pcm_chunks.append(base64.b64decode(chunk_b64))
+                                    chunk_pcm = base64.b64decode(chunk_b64)
+                                    pcm_chunks.append(chunk_pcm)
+                                    if chunk_callback:
+                                        res = chunk_callback({
+                                            "type": "audio",
+                                            "data": chunk_b64,
+                                            "pcm_bytes": chunk_pcm,
+                                            "mime_type": mime or f"audio/pcm;rate={sample_rate}",
+                                        })
+                                        if inspect.isawaitable(res):
+                                            await res
 
                     if sc.get("turnComplete"):
                         break
@@ -400,7 +424,7 @@ class GeminiLiveChat(BaseChat):
         messages: list[dict] | pw.Json | str,
         return_audio: bool | None = None,
         **kwargs: Any,
-    ) -> str | dict[str, Any]:
+    ) -> Any:
         """Execute the inference request with Google AI Studio Live / Multimodal models."""
         combined_kwargs = {**self.kwargs, **kwargs}
         model = combined_kwargs.get("model", self.model or "gemini-3.8-live")
@@ -413,10 +437,18 @@ class GeminiLiveChat(BaseChat):
         if return_audio is None:
             return_audio = combined_kwargs.get("return_audio", self.return_audio)
 
-        if not self.api_key:
+        api_key = combined_kwargs.get("api_key") or self.api_key
+        if not api_key or api_key == "fake":
+            api_key = (
+                os.environ.get("GEMINI_API_KEY")
+                or os.environ.get("GOOGLE_API_KEY")
+                or api_key
+            )
+
+        if not api_key or api_key == "fake":
             raise ValueError(
                 "Gemini API key is required. Set GEMINI_API_KEY or GOOGLE_API_KEY "
-                "environment variable or pass api_key to GeminiLiveChat."
+                "environment variable, or provide a valid api_key to GeminiLiveChat."
             )
 
         messages_decoded = _prepare_messages(messages)
@@ -431,11 +463,13 @@ class GeminiLiveChat(BaseChat):
             voice_name,
         )
 
+        chunk_callback = combined_kwargs.get("chunk_callback")
+
         if transport == "rest":
             transcript, audio_b64, _ = await self._call_rest(
                 prompt=prompt,
                 model=model,
-                api_key=self.api_key,
+                api_key=api_key,
                 api_base=self.api_base,
                 voice_name=voice_name,
                 return_audio=return_audio,
@@ -443,18 +477,62 @@ class GeminiLiveChat(BaseChat):
                 system_instruction=effective_system,
                 temperature=temperature,
             )
+            if chunk_callback:
+                if transcript:
+                    res = chunk_callback({"type": "text", "delta": transcript})
+                    if inspect.isawaitable(res):
+                        await res
+                if audio_b64:
+                    res = chunk_callback({
+                        "type": "audio",
+                        "data": audio_b64,
+                        "mime_type": f"audio/{audio_format}",
+                    })
+                    if inspect.isawaitable(res):
+                        await res
         else:
-            transcript, audio_b64, _ = await self._call_live_websocket(
-                prompt=prompt,
-                model=model,
-                api_key=self.api_key,
-                api_base=self.api_base,
-                voice_name=voice_name,
-                return_audio=return_audio,
-                audio_format=audio_format,
-                system_instruction=effective_system,
-                temperature=temperature,
-            )
+            try:
+                transcript, audio_b64, _ = await self._call_live_websocket(
+                    prompt=prompt,
+                    model=model,
+                    api_key=api_key,
+                    api_base=self.api_base,
+                    voice_name=voice_name,
+                    return_audio=return_audio,
+                    audio_format=audio_format,
+                    system_instruction=effective_system,
+                    temperature=temperature,
+                    chunk_callback=chunk_callback,
+                )
+            except Exception as ws_err:
+                logger.warning(
+                    "Gemini Live WebSocket failed (%s); falling back to REST generation.",
+                    ws_err,
+                )
+                transcript, audio_b64, _ = await self._call_rest(
+                    prompt=prompt,
+                    model=model,
+                    api_key=api_key,
+                    api_base=self.api_base,
+                    voice_name=voice_name,
+                    return_audio=return_audio,
+                    audio_format=audio_format,
+                    system_instruction=effective_system,
+                    temperature=temperature,
+                )
+                if chunk_callback:
+                    if transcript:
+                        res = chunk_callback({"type": "text", "delta": transcript})
+                        if inspect.isawaitable(res):
+                            await res
+                    if audio_b64:
+                        res = chunk_callback({
+                            "type": "audio",
+                            "data": audio_b64,
+                            "mime_type": f"audio/{audio_format}",
+                        })
+                        if inspect.isawaitable(res):
+                            await res
 
         if return_audio:
             mime_type = "audio/wav" if audio_format == "wav" else "audio/pcm"
@@ -466,3 +544,60 @@ class GeminiLiveChat(BaseChat):
             }
 
         return transcript
+
+    async def stream(
+        self,
+        messages: list[dict] | pw.Json | str,
+        return_audio: bool | None = None,
+        **kwargs: Any,
+    ) -> AsyncGenerator[dict[str, Any], None]:
+        """
+        Asynchronously stream incremental response chunks from Gemini in real time.
+
+        Yields dictionaries with event types:
+          - ``{"type": "text", "delta": str}``: Incremental text or transcript tokens.
+          - ``{"type": "audio", "data": str, "pcm_bytes": bytes, "mime_type": str}``: Raw PCM audio frames.
+          - ``{"type": "done", "response": str, "audio": str | None, "audio_mime_type": str | None}``: Turn complete.
+        """
+        queue: asyncio.Queue[dict[str, Any] | None] = asyncio.Queue()
+
+        async def _on_chunk(chunk: dict[str, Any]) -> None:
+            await queue.put(chunk)
+
+        producer_kwargs = {**kwargs, "chunk_callback": _on_chunk}
+
+        async def _producer() -> None:
+            try:
+                res = await self.__wrapped__(
+                    messages,
+                    return_audio=return_audio,
+                    **producer_kwargs,
+                )
+                if isinstance(res, dict):
+                    await queue.put({
+                        "type": "done",
+                        "response": res.get("response", ""),
+                        "audio": res.get("audio"),
+                        "audio_mime_type": res.get("audio_mime_type"),
+                    })
+                else:
+                    await queue.put({"type": "done", "response": str(res)})
+            except Exception as e:
+                await queue.put({"type": "error", "error": str(e)})
+            finally:
+                await queue.put(None)
+
+        producer_task = asyncio.create_task(_producer())
+
+        try:
+            while True:
+                item = await queue.get()
+                if item is None:
+                    break
+                if item.get("type") == "error":
+                    raise RuntimeError(item.get("error", "Stream error"))
+                yield item
+        finally:
+            if not producer_task.done():
+                producer_task.cancel()
+
