@@ -7,6 +7,7 @@ dependencies = [
     "pathway[all]>=0.26.4",
     "torch==2.9.0",
     "transformers==4.49.0",
+    "websockets>=13.0",
 ]
 
 [tool.uv]
