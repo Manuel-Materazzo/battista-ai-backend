@@ -48,8 +48,16 @@ def _prepare_messages(messages: Any) -> list[dict]:
     has_pw_json = hasattr(pw, "Json")
     if has_pw_json and isinstance(messages, pw.Json):
         messages_as_list: Iterable[dict | Any] = messages.as_list()
-    else:
+    elif isinstance(messages, (list, tuple)):
         messages_as_list = messages
+    elif isinstance(messages, dict):
+        return [messages]
+    else:
+        # Fallback if messages is another object or expression
+        try:
+            messages_as_list = list(messages)
+        except TypeError:
+            return [{"role": "user", "content": str(messages)}]
 
     messages_decoded: list[dict] = [
         message.as_dict() if has_pw_json and isinstance(message, pw.Json) else message
@@ -202,9 +210,9 @@ class GeminiLiveChat(BaseChat):
         )
 
         gen_config: dict[str, Any] = {
-            "responseModalities": ["AUDIO"] if return_audio else ["TEXT"],
+            "responseModalities": ["AUDIO"],
         }
-        if return_audio and voice_name:
+        if voice_name:
             gen_config["speechConfig"] = {
                 "voiceConfig": {
                     "prebuiltVoiceConfig": {
@@ -219,10 +227,9 @@ class GeminiLiveChat(BaseChat):
             "setup": {
                 "model": clean_model,
                 "generationConfig": gen_config,
+                "outputAudioTranscription": {},
             }
         }
-        if return_audio:
-            setup_msg["setup"]["outputAudioTranscription"] = {}
         if system_instruction:
             setup_msg["setup"]["systemInstruction"] = {
                 "parts": [{"text": system_instruction}]
@@ -302,16 +309,17 @@ class GeminiLiveChat(BaseChat):
                                 chunk_b64 = inline.get("data", "")
                                 if chunk_b64:
                                     chunk_pcm = base64.b64decode(chunk_b64)
-                                    pcm_chunks.append(chunk_pcm)
-                                    if chunk_callback:
-                                        res = chunk_callback({
-                                            "type": "audio",
-                                            "data": chunk_b64,
-                                            "pcm_bytes": chunk_pcm,
-                                            "mime_type": mime or f"audio/pcm;rate={sample_rate}",
-                                        })
-                                        if inspect.isawaitable(res):
-                                            await res
+                                    if return_audio:
+                                        pcm_chunks.append(chunk_pcm)
+                                        if chunk_callback:
+                                            res = chunk_callback({
+                                                "type": "audio",
+                                                "data": chunk_b64,
+                                                "pcm_bytes": chunk_pcm,
+                                                "mime_type": mime or f"audio/pcm;rate={sample_rate}",
+                                            })
+                                            if inspect.isawaitable(res):
+                                                await res
 
                     if sc.get("turnComplete"):
                         break

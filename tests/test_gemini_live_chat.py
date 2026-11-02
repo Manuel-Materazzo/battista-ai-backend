@@ -35,9 +35,21 @@ def test_prepare_messages():
     msgs = _prepare_messages("Hello world")
     assert msgs == [{"role": "user", "content": "Hello world"}]
 
+    # Single dict
+    single = {"role": "user", "content": "Query"}
+    assert _prepare_messages(single) == [single]
+
     # List of dicts
     sample = [{"role": "user", "content": "Query"}]
     assert _prepare_messages(sample) == sample
+
+    # Non-iterable object
+    class NonIterable:
+        def __str__(self):
+            return "non-iterable-str"
+
+    fallback = _prepare_messages(NonIterable())
+    assert fallback == [{"role": "user", "content": "non-iterable-str"}]
 
 
 def test_extract_prompt_and_system():
