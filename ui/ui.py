@@ -1,6 +1,7 @@
 # Copyright © 2024 Pathway
 
 import base64
+import json
 import logging
 import os
 
@@ -69,11 +70,13 @@ div[data-testid="stHorizontalBlock"]:has(button[data-testid="baseButton-primary"
     unsafe_allow_html=True,
 )
 
-col_input, col_toggle = st.columns([4, 1])
+col_input, col_voice, col_stream = st.columns([4, 1, 1])
 with col_input:
     question = st.text_input(label="", placeholder="Ask your question?")
-with col_toggle:
-    voice_output = st.toggle("🔊 Voice response", value=False)
+with col_voice:
+    voice_output = st.toggle("🔊 Voice", value=False)
+with col_stream:
+    stream_output = st.toggle("⚡ Stream", value=True)
 
 
 def get_indexed_files(metadata_list: list[dict], opt_key: str) -> list:
@@ -174,28 +177,74 @@ if question:
             "_type": "search_request_event",
             "query": question,
             "voice_output": voice_output,
+            "stream_output": stream_output,
         }
     )
 
-    with st.spinner("Retrieving response..."):
-        if voice_output:
-            resp = requests.post(
+    st.markdown(f"**Answering question:** {question}")
+
+    response = ""
+    context_docs = []
+    audio_b64 = None
+    audio_mime_type = "audio/wav"
+
+    if stream_output:
+        def sse_token_stream():
+            nonlocal response, context_docs, audio_b64, audio_mime_type
+            with requests.post(
                 f"http://{PATHWAY_HOST}:{PATHWAY_PORT}/v2/answer",
                 json={
                     "prompt": question,
+                    "stream": True,
+                    "return_audio": voice_output,
                     "return_context_docs": True,
-                    "return_audio": True,
                 },
+                stream=True,
                 timeout=60,
-            )
-            api_response = resp.json()
-        else:
-            api_response = conn.answer(question, return_context_docs=True)
+            ) as r:
+                r.raise_for_status()
+                for line in r.iter_lines():
+                    if not line:
+                        continue
+                    line_str = line.decode("utf-8")
+                    if line_str.startswith("data: "):
+                        data_payload = json.loads(line_str[6:])
+                        if "delta" in data_payload:
+                            delta_text = data_payload["delta"]
+                            response += delta_text
+                            yield delta_text
+                        if "response" in data_payload:
+                            if not response:
+                                response = data_payload["response"]
+                            audio_b64 = data_payload.get("audio")
+                            audio_mime_type = data_payload.get(
+                                "audio_mime_type", "audio/wav"
+                            )
+                            context_docs = data_payload.get("context_docs", [])
 
-        response = api_response.get("response", "")
-        context_docs = api_response.get("context_docs", [])
-        audio_b64 = api_response.get("audio")
-        audio_mime_type = api_response.get("audio_mime_type", "audio/wav")
+        st.write_stream(sse_token_stream)
+    else:
+        with st.spinner("Retrieving response..."):
+            if voice_output:
+                resp = requests.post(
+                    f"http://{PATHWAY_HOST}:{PATHWAY_PORT}/v2/answer",
+                    json={
+                        "prompt": question,
+                        "return_context_docs": True,
+                        "return_audio": True,
+                    },
+                    timeout=60,
+                )
+                api_response = resp.json()
+            else:
+                api_response = conn.answer(question, return_context_docs=True)
+
+            response = api_response.get("response", "")
+            context_docs = api_response.get("context_docs", [])
+            audio_b64 = api_response.get("audio")
+            audio_mime_type = api_response.get("audio_mime_type", "audio/wav")
+
+        st.markdown(f"""{response}""")
 
     logger.info(
         {
@@ -205,9 +254,6 @@ if question:
             "has_audio": bool(audio_b64),
         }
     )
-
-    st.markdown(f"**Answering question:** {question}")
-    st.markdown(f"""{response}""")
 
     if audio_b64:
         try:
