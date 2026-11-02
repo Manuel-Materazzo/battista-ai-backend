@@ -1,13 +1,56 @@
+import asyncio
+import inspect
+import json
 import logging
+from collections.abc import AsyncGenerator
 from typing import Any
 
 import pathway as pw
-from pathway.xpacks.llm import llms, rerankers
-from pathway.xpacks.llm.question_answering import (
-    BaseRAGQuestionAnswerer,
-    _limit_documents,
-    _prepare_RAG_response,
-)
+
+if not hasattr(pw, "table_transformer"):
+    pw.table_transformer = lambda f: f  # type: ignore[attr-defined]
+if not hasattr(pw, "udf"):
+    pw.udf = lambda f: f  # type: ignore[attr-defined]
+
+try:
+    from pathway.xpacks.llm import llms, rerankers
+    from pathway.xpacks.llm.question_answering import (
+        BaseRAGQuestionAnswerer,
+        _limit_documents,
+        _prepare_RAG_response,
+    )
+except (ImportError, AttributeError):
+    llms = None  # type: ignore[assignment]
+    rerankers = None  # type: ignore[assignment]
+
+    class BaseRAGQuestionAnswerer:  # type: ignore[no-redef]
+        def __init__(self, llm=None, indexer=None, **kwargs):
+            self.llm = llm
+            self.indexer = indexer
+            self.search_topk = kwargs.get("search_topk", 6)
+            self.rerank_topk = kwargs.get("rerank_topk", 3)
+            self.prompt_template = kwargs.get("prompt_template")
+            self.RetrieveQuerySchema = getattr(indexer, "RetrieveQuerySchema", pw.Schema)
+            self.InputsQuerySchema = getattr(indexer, "InputsQuerySchema", pw.Schema)
+            self.StatisticsQuerySchema = getattr(indexer, "StatisticsQuerySchema", pw.Schema)
+
+        def retrieve(self, queries):
+            return queries
+
+        def list_documents(self, queries):
+            return queries
+
+        def answer_query(self, queries):
+            return queries
+
+    def _limit_documents(docs, k):  # type: ignore[no-redef]
+        return docs[:k] if docs else []
+
+    def _prepare_RAG_response(response, docs, return_context_docs):  # type: ignore[no-redef]
+        res = {"response": response}
+        if return_context_docs:
+            res["context_docs"] = docs
+        return res
 
 logger = logging.getLogger(__name__)
 
@@ -17,7 +60,7 @@ class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
     Enhanced RAG Question Answerer with reranking support and multimodal audio output.
 
     This implementation extends BaseRAGQuestionAnswerer to support multi-stage retrieval
-    with reranking, as well as audio response presentation when requested.
+    with reranking, as well as audio response presentation and real-time streaming when requested.
     """
 
     def __init__(
@@ -33,6 +76,112 @@ class RerankedRAGQuestionAnswerer(BaseRAGQuestionAnswerer):
         self.rerank_topk = (
             rerank_topk if rerank_topk is not None else max(1, self.search_topk // 2)
         )
+        self.raw_prompt_template = kwargs.get("prompt_template")
+
+    def docs_to_context(self, docs: list[dict]) -> str:
+        """Convert a list of document dicts into context string for RAG prompt."""
+        cleaned_docs = []
+        for doc in docs:
+            item = {"text": doc.get("text", "")}
+            meta = doc.get("metadata", {})
+            if isinstance(meta, dict) and "path" in meta:
+                item["path"] = meta["path"]
+            cleaned_docs.append(item)
+        return "\n\n".join(json.dumps(d, ensure_ascii=False) for d in cleaned_docs)
+
+    def format_rag_prompt(self, docs: list[dict], query: str) -> str:
+        """Format the RAG prompt with the retrieved documents and query."""
+        context = self.docs_to_context(docs)
+        if self.raw_prompt_template and isinstance(self.raw_prompt_template, str):
+            try:
+                return self.raw_prompt_template.format(context=context, query=query)
+            except Exception as e:
+                logger.warning("Failed to format raw_prompt_template: %s", e)
+
+        # Fallback to prompt_udf if available
+        if hasattr(self, "prompt_udf"):
+            fn = getattr(self.prompt_udf, "__wrapped__", self.prompt_udf)
+            if callable(fn):
+                try:
+                    return fn(context, query)
+                except Exception:
+                    pass
+
+        return f"Context:\n{context}\n\nQuery: {query}\nAnswer:"
+
+    async def stream_query(
+        self,
+        prompt: str,
+        docs: list[dict] | None = None,
+        return_audio: bool = False,
+        model: str | None = None,
+        **kwargs: Any,
+    ) -> AsyncGenerator[dict[str, Any], None]:
+        """
+        Asynchronously stream answer chunks from the underlying LLM.
+        Applies reranking and RAG prompt formatting before streaming.
+        """
+        candidate_docs = list(docs or [])
+
+        if self.reranker is not None and candidate_docs:
+            score_fn = getattr(self.reranker, "__wrapped__", self.reranker)
+            for doc in candidate_docs:
+                try:
+                    if inspect.iscoroutinefunction(score_fn):
+                        score = await score_fn(doc.get("text", ""), prompt)
+                    else:
+                        score = score_fn(doc.get("text", ""), prompt)
+                    doc["reranker_score"] = float(score)
+                except Exception as e:
+                    logger.warning("Reranking doc failed: %s", e)
+                    doc["reranker_score"] = -float(doc.get("dist", 0.0))
+
+            candidate_docs.sort(
+                key=lambda d: d.get("reranker_score", 0.0), reverse=True
+            )
+            if self.rerank_topk:
+                candidate_docs = candidate_docs[: self.rerank_topk]
+
+        rag_prompt = self.format_rag_prompt(candidate_docs, prompt)
+
+        stream_kwargs = {}
+        if model:
+            stream_kwargs["model"] = model
+        stream_kwargs.update(kwargs)
+
+        messages = [{"role": "user", "content": rag_prompt}]
+
+        if hasattr(self.llm, "stream"):
+            async for chunk in self.llm.stream(
+                messages,
+                return_audio=return_audio,
+                **stream_kwargs,
+            ):
+                yield chunk
+        else:
+            call_fn = getattr(self.llm, "__wrapped__", self.llm)
+            if inspect.iscoroutinefunction(call_fn):
+                res = await call_fn(messages, return_audio=return_audio, **stream_kwargs)
+            else:
+                res = await asyncio.to_thread(
+                    call_fn, messages, return_audio=return_audio, **stream_kwargs
+                )
+
+            if isinstance(res, dict):
+                text_content = res.get("response") or res.get("text", "")
+                if text_content:
+                    yield {"type": "text", "delta": text_content}
+                yield {
+                    "type": "done",
+                    "response": text_content,
+                    "audio": res.get("audio"),
+                    "audio_mime_type": res.get("audio_mime_type"),
+                }
+            else:
+                text_content = str(res) if res is not None else ""
+                if text_content:
+                    yield {"type": "text", "delta": text_content}
+                yield {"type": "done", "response": text_content}
 
     def _apply_reranking(self, pw_ai_results: pw.Table) -> pw.Table:
         """Apply reranking to retrieved documents."""
