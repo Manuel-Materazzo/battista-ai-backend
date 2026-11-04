@@ -1,12 +1,13 @@
+from __future__ import annotations
 import logging
 import pathway as pw
 
 
 class ChatModerator:
     # Define the schema for the moderation endpoint
-    class ModerationSchema(pw.Schema):
+    class ModerationSchema(getattr(pw, "Schema", object)):
         prompt: str
-        masking: bool = pw.column_definition(default_value=False)
+        masking: bool = getattr(pw, "column_definition", lambda **kw: None)(default_value=False)
 
     def __init__(self, moderator: pw.UDF):
         self.logger = logging.getLogger(__name__)
