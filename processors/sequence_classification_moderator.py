@@ -1,22 +1,42 @@
+from __future__ import annotations
+
+from typing import Any
 import pathway as pw
-from pathway.internals import udfs
-from pathway.xpacks.llm._utils import _extract_value
+
+try:
+    from pathway.internals import udfs
+except (ImportError, AttributeError):
+    try:
+        from pathway import udfs  # type: ignore[no-redef]
+    except (ImportError, AttributeError):
+        udfs = None  # type: ignore[assignment]
+
+try:
+    from pathway.xpacks.llm._utils import _extract_value
+except (ImportError, AttributeError):
+    def _extract_value(x):  # type: ignore[no-redef]
+        return x.value if hasattr(x, "value") else x
+
+UDFBase = pw.UDF if hasattr(pw, "UDF") else object
 
 
-class SequenceClassificationModerator(pw.UDF):
+class SequenceClassificationModerator(UDFBase):
 
     def __init__(
             self,
             model_name: str,
             tokenizer_model_name: str,
             *,
-            cache_strategy: udfs.CacheStrategy | None = None,
+            cache_strategy: Any | None = None,
             **init_kwargs,
     ) -> None:
         # import is nested, otherwise pathway will import whole library at startup even if not used.
         from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-        super().__init__(cache_strategy=cache_strategy)
+        if hasattr(pw, "UDF"):
+            super().__init__(cache_strategy=cache_strategy)
+        else:
+            super().__init__()
 
         self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_model_name)
         self.model = AutoModelForSequenceClassification.from_pretrained(model_name)

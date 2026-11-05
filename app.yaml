@@ -97,7 +97,7 @@ $embedder: !pw.xpacks.llm.embedders.SentenceTransformerEmbedder
 
 # Specifies the moderator model for moderating the chat.
 chat_moderator: !processors.chat_moderator.ChatModerator
-  moderator: !processors.sequence_classification_moderator.SequenceClassificationModerator
+    moderator: !processors.sequence_classification_moderator.SequenceClassificationModerator
     model_name: $moderator_model
     tokenizer_model_name: $moderator_model
 
